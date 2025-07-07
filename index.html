@@ -14,22 +14,23 @@
         }
 
         :root {
-            --primary: #1a73e8;
-            --primary-dark: #0d47a1;
-            --secondary: #42a5f5;
+            --primary: #0a0a0a;
+            --secondary: #1a1a1a;
             --accent: #ff6d00;
-            --light: #e3f2fd;
-            --dark: #0a1e3c;
+            --accent-hover: #ff8c33;
+            --light: #f5f5f5;
+            --gray: #444;
             --success: #4caf50;
             --warning: #ff9800;
             --danger: #f44336;
         }
 
         body {
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            background: linear-gradient(135deg, #000, #222);
             color: #fff;
             min-height: 100vh;
             padding-bottom: 40px;
+            background-attachment: fixed;
         }
 
         .container {
@@ -41,12 +42,13 @@
 
         /* Header Styles */
         header {
-            background-color: rgba(10, 30, 60, 0.9);
+            background-color: rgba(10, 10, 10, 0.95);
             padding: 15px 0;
             position: sticky;
             top: 0;
             z-index: 100;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            border-bottom: 1px solid #333;
         }
 
         .header-content {
@@ -68,7 +70,7 @@
         .logo h1 {
             font-size: 24px;
             font-weight: 700;
-            background: linear-gradient(to right, #4facfe, #00f2fe);
+            background: linear-gradient(to right, #ff6d00, #ff9e00);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
@@ -80,7 +82,7 @@
         }
 
         nav a {
-            color: #fff;
+            color: var(--light);
             text-decoration: none;
             font-weight: 500;
             font-size: 16px;
@@ -90,7 +92,7 @@
         }
 
         nav a:hover {
-            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--accent);
         }
 
         .auth-buttons {
@@ -117,8 +119,9 @@
         }
 
         .btn-primary:hover {
-            background-color: #e65100;
+            background-color: var(--accent-hover);
             transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 109, 0, 0.3);
         }
 
         .btn-secondary {
@@ -133,14 +136,27 @@
 
         /* Hero Section */
         .hero {
-            padding: 60px 0;
+            padding: 80px 0 60px;
             text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, rgba(255, 109, 0, 0.1) 0%, transparent 70%);
+            z-index: -1;
         }
 
         .hero h2 {
             font-size: 2.8rem;
             margin-bottom: 15px;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
         }
 
         .hero p {
@@ -148,10 +164,11 @@
             max-width: 700px;
             margin: 0 auto 30px;
             opacity: 0.9;
+            color: #ddd;
         }
 
         .promo-banner {
-            background: linear-gradient(to right, #ff8a00, #da1b60);
+            background: linear-gradient(to right, #ff6d00, #ff3d00);
             padding: 15px;
             border-radius: 10px;
             margin: 30px auto;
@@ -160,7 +177,8 @@
             align-items: center;
             justify-content: center;
             gap: 15px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 4px 20px rgba(255, 109, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .promo-banner i {
@@ -197,23 +215,26 @@
         }
 
         .game-card {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(30, 30, 30, 0.7);
             border-radius: 15px;
             overflow: hidden;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            border: 1px solid #333;
             backdrop-filter: blur(10px);
         }
 
         .game-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+            border-color: #ff6d00;
         }
 
         .game-image {
             height: 150px;
             background-size: cover;
             background-position: center;
+            border-bottom: 2px solid var(--accent);
         }
 
         .game-content {
@@ -223,6 +244,7 @@
         .game-content h3 {
             font-size: 1.3rem;
             margin-bottom: 15px;
+            color: #fff;
         }
 
         .diamond-packages {
@@ -232,20 +254,22 @@
         }
 
         .diamond-package {
-            background: rgba(0, 0, 0, 0.2);
+            background: rgba(0, 0, 0, 0.4);
             border-radius: 8px;
             padding: 10px;
             text-align: center;
-            transition: background 0.3s ease;
+            transition: all 0.3s ease;
             cursor: pointer;
+            border: 1px solid #333;
         }
 
         .diamond-package:hover {
-            background: rgba(0, 0, 0, 0.3);
+            background: rgba(0, 0, 0, 0.6);
+            border-color: var(--accent);
         }
 
         .diamond-package i {
-            color: #b9f2ff;
+            color: #ffd700;
             font-size: 1.2rem;
             margin-bottom: 5px;
         }
@@ -253,6 +277,7 @@
         .diamond-package .diamond-amount {
             font-weight: 700;
             margin-bottom: 5px;
+            color: #fff;
         }
 
         .diamond-package .diamond-price {
@@ -265,14 +290,17 @@
             opacity: 0.7;
             font-size: 0.8rem;
             margin-top: 2px;
+            color: #bbb;
         }
 
         /* Payment Methods */
         .payment-section {
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(30, 30, 30, 0.7);
             border-radius: 15px;
             padding: 30px;
             margin: 40px 0;
+            border: 1px solid #333;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
         }
 
         .payment-methods {
@@ -284,19 +312,21 @@
         }
 
         .payment-method {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(0, 0, 0, 0.4);
             border-radius: 10px;
             padding: 15px 25px;
             display: flex;
             align-items: center;
             gap: 10px;
-            transition: transform 0.3s ease;
+            transition: all 0.3s ease;
             cursor: pointer;
+            border: 1px solid #333;
         }
 
         .payment-method:hover {
             transform: scale(1.05);
-            background: rgba(255, 255, 255, 0.15);
+            background: rgba(0, 0, 0, 0.6);
+            border-color: var(--accent);
         }
 
         .payment-method i {
@@ -309,11 +339,13 @@
 
         /* History Section */
         .history-section {
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(30, 30, 30, 0.7);
             border-radius: 15px;
             padding: 30px;
             margin: 40px 0;
             position: relative;
+            border: 1px solid #333;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
         }
 
         .history-container {
@@ -322,14 +354,29 @@
             padding-right: 10px;
         }
 
-        .history-item {
+        .history-container::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .history-container::-webkit-scrollbar-thumb {
+            background-color: var(--accent);
+            border-radius: 4px;
+        }
+
+        .history-container::-webkit-scrollbar-track {
             background: rgba(0, 0, 0, 0.2);
+            border-radius: 4px;
+        }
+
+        .history-item {
+            background: rgba(0, 0, 0, 0.4);
             border-radius: 8px;
             padding: 15px;
             margin-bottom: 15px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            border: 1px solid #333;
         }
 
         .history-game {
@@ -352,20 +399,24 @@
         .status-success {
             background-color: rgba(76, 175, 80, 0.2);
             color: #4caf50;
+            border: 1px solid #4caf50;
         }
 
         .status-pending {
             background-color: rgba(255, 152, 0, 0.2);
             color: #ff9800;
+            border: 1px solid #ff9800;
         }
 
         /* Contact Section */
         .contact-section {
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(30, 30, 30, 0.7);
             border-radius: 15px;
             padding: 30px;
             margin: 40px 0;
             text-align: center;
+            border: 1px solid #333;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
         }
 
         .contact-methods {
@@ -381,15 +432,17 @@
             flex-direction: column;
             align-items: center;
             gap: 10px;
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(0, 0, 0, 0.4);
             padding: 20px;
             border-radius: 10px;
             min-width: 200px;
             transition: transform 0.3s ease;
+            border: 1px solid #333;
         }
 
         .contact-method:hover {
             transform: translateY(-5px);
+            border-color: var(--accent);
         }
 
         .contact-method i {
@@ -400,6 +453,7 @@
         .contact-method h3 {
             font-size: 1.2rem;
             margin-bottom: 10px;
+            color: #fff;
         }
 
         .whatsapp-btn {
@@ -414,10 +468,13 @@
             font-weight: 600;
             margin-top: 10px;
             transition: background 0.3s ease;
+            border: none;
+            cursor: pointer;
         }
 
         .whatsapp-btn:hover {
             background-color: #128C7E;
+            transform: translateY(-2px);
         }
 
         /* Footer */
@@ -431,6 +488,72 @@
         .copyright {
             opacity: 0.7;
             margin-top: 20px;
+            color: #aaa;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: var(--secondary);
+            border-radius: 15px;
+            padding: 30px;
+            width: 90%;
+            max-width: 500px;
+            border: 1px solid #333;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            position: relative;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 24px;
+            cursor: pointer;
+            color: #aaa;
+            transition: color 0.3s;
+        }
+
+        .close-modal:hover {
+            color: #fff;
+        }
+
+        .modal-title {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #fff;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #ddd;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border-radius: 8px;
+            border: 1px solid #333;
+            background: rgba(0, 0, 0, 0.4);
+            color: #fff;
+            font-size: 16px;
         }
 
         /* Responsive */
@@ -468,7 +591,7 @@
         <div class="container">
             <div class="header-content">
                 <div class="logo">
-                    <i class="fas fa-gem" style="color: #4facfe; font-size: 36px;"></i>
+                    <i class="fas fa-gem" style="color: #ff6d00; font-size: 36px;"></i>
                     <h1>GarzVoucher</h1>
                 </div>
                 <nav>
@@ -480,15 +603,15 @@
                     </ul>
                 </nav>
                 <div class="auth-buttons">
-                    <button class="btn btn-secondary"><i class="fab fa-google"></i> Google</button>
-                    <button class="btn btn-secondary"><i class="fab fa-facebook"></i> Facebook</button>
+                    <button class="btn btn-secondary" id="google-login"><i class="fab fa-google"></i> Google</button>
+                    <button class="btn btn-secondary" id="facebook-login"><i class="fab fa-facebook"></i> Facebook</button>
                 </div>
             </div>
         </div>
     </header>
 
     <!-- Hero Section -->
-    <section class="hero">
+    <section class="hero" id="promo">
         <div class="container">
             <h2>Top Up Diamond Game Murah & Cepat</h2>
             <p>Top up diamond game favoritmu dengan harga termurah dan proses instan hanya di GarzVoucher. Pembayaran mudah dengan berbagai metode!</p>
@@ -511,29 +634,29 @@
             <div class="games-grid">
                 <!-- Game 1 -->
                 <div class="game-card">
-                    <div class="game-image" style="background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1612287230202-1ff1d85d1bdf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80');"></div>
+                    <div class="game-image" style="background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1612287230202-1ff1d85d1bdf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80');"></div>
                     <div class="game-content">
                         <h3>Mobile Legends</h3>
                         <div class="diamond-packages">
-                            <div class="diamond-package">
+                            <div class="diamond-package" data-game="Mobile Legends" data-diamond="10" data-price="1990">
                                 <i class="fas fa-gem"></i>
                                 <div class="diamond-amount">10 Diamonds</div>
                                 <div class="diamond-price">Rp1.990</div>
                                 <div class="original-price">Rp2.500</div>
                             </div>
-                            <div class="diamond-package">
+                            <div class="diamond-package" data-game="Mobile Legends" data-diamond="55" data-price="12000">
                                 <i class="fas fa-gem"></i>
                                 <div class="diamond-amount">55 Diamonds</div>
                                 <div class="diamond-price">Rp12.000</div>
                                 <div class="original-price">Rp15.000</div>
                             </div>
-                            <div class="diamond-package">
+                            <div class="diamond-package" data-game="Mobile Legends" data-diamond="100" data-price="15917">
                                 <i class="fas fa-gem"></i>
                                 <div class="diamond-amount">100 Diamonds</div>
                                 <div class="diamond-price">Rp15.917</div>
                                 <div class="original-price">Rp20.000</div>
                             </div>
-                            <div class="diamond-package">
+                            <div class="diamond-package" data-game="Mobile Legends" data-diamond="150" data-price="21979">
                                 <i class="fas fa-gem"></i>
                                 <div class="diamond-amount">150 Diamonds</div>
                                 <div class="diamond-price">Rp21.979</div>
@@ -545,29 +668,29 @@
                 
                 <!-- Game 2 -->
                 <div class="game-card">
-                    <div class="game-image" style="background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1552820728-8b83bb6b773f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80');"></div>
+                    <div class="game-image" style="background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1552820728-8b83bb6b773f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80');"></div>
                     <div class="game-content">
                         <h3>Free Fire</h3>
                         <div class="diamond-packages">
-                            <div class="diamond-package">
+                            <div class="diamond-package" data-game="Free Fire" data-diamond="12" data-price="1908">
                                 <i class="fas fa-gem"></i>
                                 <div class="diamond-amount">12 Diamonds</div>
                                 <div class="diamond-price">Rp1.908</div>
                                 <div class="original-price">Rp2.400</div>
                             </div>
-                            <div class="diamond-package">
+                            <div class="diamond-package" data-game="Free Fire" data-diamond="70" data-price="15917">
                                 <i class="fas fa-gem"></i>
                                 <div class="diamond-amount">70 Diamonds</div>
                                 <div class="diamond-price">Rp15.917</div>
                                 <div class="original-price">Rp19.000</div>
                             </div>
-                            <div class="diamond-package">
+                            <div class="diamond-package" data-game="Free Fire" data-diamond="120" data-price="17789">
                                 <i class="fas fa-gem"></i>
                                 <div class="diamond-amount">120 Diamonds</div>
                                 <div class="diamond-price">Rp17.789</div>
                                 <div class="original-price">Rp22.000</div>
                             </div>
-                            <div class="diamond-package">
+                            <div class="diamond-package" data-game="Free Fire" data-diamond="190" data-price="24382">
                                 <i class="fas fa-gem"></i>
                                 <div class="diamond-amount">190 Diamonds</div>
                                 <div class="diamond-price">Rp24.382</div>
@@ -579,29 +702,29 @@
                 
                 <!-- Game 3 -->
                 <div class="game-card">
-                    <div class="game-image" style="background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1551103782-8ab07afd45c1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80');"></div>
+                    <div class="game-image" style="background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1551103782-8ab07afd45c1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80');"></div>
                     <div class="game-content">
                         <h3>PUBG Mobile</h3>
                         <div class="diamond-packages">
-                            <div class="diamond-package">
+                            <div class="diamond-package" data-game="PUBG Mobile" data-diamond="80" data-price="12000">
                                 <i class="fas fa-gem"></i>
                                 <div class="diamond-amount">80 Diamonds</div>
                                 <div class="diamond-price">Rp12.000</div>
                                 <div class="original-price">Rp15.000</div>
                             </div>
-                            <div class="diamond-package">
+                            <div class="diamond-package" data-game="PUBG Mobile" data-diamond="130" data-price="19662">
                                 <i class="fas fa-gem"></i>
                                 <div class="diamond-amount">130 Diamonds</div>
                                 <div class="diamond-price">Rp19.662</div>
                                 <div class="original-price">Rp24.000</div>
                             </div>
-                            <div class="diamond-package">
+                            <div class="diamond-package" data-game="PUBG Mobile" data-diamond="140" data-price="20483">
                                 <i class="fas fa-gem"></i>
                                 <div class="diamond-amount">140 Diamonds</div>
                                 <div class="diamond-price">Rp20.483</div>
                                 <div class="original-price">Rp25.500</div>
                             </div>
-                            <div class="diamond-package">
+                            <div class="diamond-package" data-game="PUBG Mobile" data-diamond="270" data-price="31232">
                                 <i class="fas fa-gem"></i>
                                 <div class="diamond-amount">270 Diamonds</div>
                                 <div class="diamond-price">Rp31.232</div>
@@ -613,29 +736,29 @@
                 
                 <!-- Game 4 -->
                 <div class="game-card">
-                    <div class="game-image" style="background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1618336753974-aae8e04506aa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80');"></div>
+                    <div class="game-image" style="background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1618336753974-aae8e04506aa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80');"></div>
                     <div class="game-content">
                         <h3>Call of Duty Mobile</h3>
                         <div class="diamond-packages">
-                            <div class="diamond-package">
+                            <div class="diamond-package" data-game="Call of Duty Mobile" data-diamond="55" data-price="12000">
                                 <i class="fas fa-gem"></i>
                                 <div class="diamond-amount">55 Diamonds</div>
                                 <div class="diamond-price">Rp12.000</div>
                                 <div class="original-price">Rp15.000</div>
                             </div>
-                            <div class="diamond-package">
+                            <div class="diamond-package" data-game="Call of Duty Mobile" data-diamond="100" data-price="15917">
                                 <i class="fas fa-gem"></i>
                                 <div class="diamond-amount">100 Diamonds</div>
                                 <div class="diamond-price">Rp15.917</div>
                                 <div class="original-price">Rp20.000</div>
                             </div>
-                            <div class="diamond-package">
+                            <div class="diamond-package" data-game="Call of Duty Mobile" data-diamond="150" data-price="21979">
                                 <i class="fas fa-gem"></i>
                                 <div class="diamond-amount">150 Diamonds</div>
                                 <div class="diamond-price">Rp21.979</div>
                                 <div class="original-price">Rp27.000</div>
                             </div>
-                            <div class="diamond-package">
+                            <div class="diamond-package" data-game="Call of Duty Mobile" data-diamond="1100" data-price="52233">
                                 <i class="fas fa-gem"></i>
                                 <div class="diamond-amount">1100 Diamonds</div>
                                 <div class="diamond-price">Rp52.233</div>
@@ -652,26 +775,26 @@
     <section class="payment-section">
         <div class="container">
             <h2 class="section-title">Metode Pembayaran</h2>
-            <p style="text-align: center; margin-bottom: 20px;">Pilih metode pembayaran yang paling nyaman untuk Anda</p>
+            <p style="text-align: center; margin-bottom: 20px; color: #ddd;">Pilih metode pembayaran yang paling nyaman untuk Anda</p>
             
             <div class="payment-methods">
-                <div class="payment-method">
+                <div class="payment-method" data-method="dana">
                     <i class="fab fa-cc-visa" style="color: #1a1f71;"></i>
                     <span>Kartu Kredit/Debit</span>
                 </div>
-                <div class="payment-method">
+                <div class="payment-method" data-method="dana">
                     <i class="fas fa-wallet" style="color: #00a650;"></i>
                     <span>DANA</span>
                 </div>
-                <div class="payment-method">
+                <div class="payment-method" data-method="ovo">
                     <i class="fas fa-mobile-alt" style="color: #662d91;"></i>
                     <span>OVO</span>
                 </div>
-                <div class="payment-method">
+                <div class="payment-method" data-method="gopay">
                     <i class="fab fa-google-pay" style="color: #4285f4;"></i>
                     <span>GOPAY</span>
                 </div>
-                <div class="payment-method">
+                <div class="payment-method" data-method="shopeepay">
                     <i class="fas fa-shopping-bag" style="color: #f43249;"></i>
                     <span>ShopeePay</span>
                 </div>
@@ -751,7 +874,7 @@
     <section id="contact" class="contact-section">
         <div class="container">
             <h2 class="section-title">Kontak Kami</h2>
-            <p>Butuh bantuan? Hubungi kami melalui kontak di bawah ini</p>
+            <p style="color: #ddd;">Butuh bantuan? Hubungi kami melalui kontak di bawah ini</p>
             
             <div class="contact-methods">
                 <div class="contact-method">
@@ -764,9 +887,9 @@
                     <i class="fab fa-whatsapp"></i>
                     <h3>WhatsApp</h3>
                     <p>+62 895-4021-28077</p>
-                    <a href="https://wa.me/62895402128077" class="whatsapp-btn">
+                    <button class="whatsapp-btn" id="whatsapp-button">
                         <i class="fab fa-whatsapp"></i> Hubungi via WhatsApp
-                    </a>
+                    </button>
                 </div>
                 
                 <div class="contact-method">
@@ -782,47 +905,125 @@
     <footer>
         <div class="container">
             <div class="logo">
-                <i class="fas fa-gem" style="color: #4facfe; font-size: 28px;"></i>
+                <i class="fas fa-gem" style="color: #ff6d00; font-size: 28px;"></i>
                 <h1>GarzVoucher</h1>
             </div>
-            <p>Top Up Diamond Game Termurah dan Terpercaya</p>
+            <p style="color: #ddd;">Top Up Diamond Game Termurah dan Terpercaya</p>
             <div class="copyright">
                 &copy; 2025 GarzVoucher. Hak Cipta Dilindungi.
             </div>
         </div>
     </footer>
 
+    <!-- Payment Modal -->
+    <div class="modal" id="payment-modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2 class="modal-title">Lanjutkan Pembayaran</h2>
+            
+            <div class="form-group">
+                <label for="game">Game</label>
+                <input type="text" id="game" readonly>
+            </div>
+            
+            <div class="form-group">
+                <label for="diamond">Jumlah Diamond</label>
+                <input type="text" id="diamond" readonly>
+            </div>
+            
+            <div class="form-group">
+                <label for="price">Harga</label>
+                <input type="text" id="price" readonly>
+            </div>
+            
+            <div class="form-group">
+                <label for="payment-method">Metode Pembayaran</label>
+                <select id="payment-method" class="form-group input">
+                    <option value="">Pilih metode pembayaran</option>
+                    <option value="dana">DANA</option>
+                    <option value="ovo">OVO</option>
+                    <option value="gopay">GOPAY</option>
+                    <option value="shopeepay">ShopeePay</option>
+                    <option value="creditcard">Kartu Kredit/Debit</option>
+                </select>
+            </div>
+            
+            <button class="btn btn-primary" style="width: 100%; margin-top: 20px;">Bayar Sekarang</button>
+        </div>
+    </div>
+
     <script>
-        // Simple interaction for diamond packages
+        // Simpan paket diamond yang dipilih
+        let selectedPackage = null;
+        
+        // Diamond packages interaction
         document.querySelectorAll('.diamond-package').forEach(package => {
             package.addEventListener('click', function() {
                 // Remove active class from all packages
                 document.querySelectorAll('.diamond-package').forEach(p => {
-                    p.style.border = 'none';
+                    p.style.border = '1px solid #333';
                 });
                 
                 // Add active style to clicked package
                 this.style.border = '2px solid #ff6d00';
                 
-                // Show payment methods section
-                document.querySelector('.payment-section').scrollIntoView({
-                    behavior: 'smooth'
+                // Simpan data paket yang dipilih
+                selectedPackage = {
+                    game: this.dataset.game,
+                    diamond: this.dataset.diamond,
+                    price: this.dataset.price
+                };
+                
+                // Tampilkan modal pembayaran
+                document.getElementById('game').value = selectedPackage.game;
+                document.getElementById('diamond').value = selectedPackage.diamond + ' Diamonds';
+                document.getElementById('price').value = 'Rp' + parseInt(selectedPackage.price).toLocaleString('id-ID');
+                
+                document.getElementById('payment-modal').style.display = 'flex';
+            });
+        });
+        
+        // Payment methods interaction
+        document.querySelectorAll('.payment-method').forEach(method => {
+            method.addEventListener('click', function() {
+                // Remove active class from all methods
+                document.querySelectorAll('.payment-method').forEach(m => {
+                    m.style.border = '1px solid #333';
                 });
+                
+                // Add active style to clicked method
+                this.style.border = '2px solid #ff6d00';
             });
         });
         
         // WhatsApp button functionality
-        document.querySelector('.whatsapp-btn').addEventListener('click', function(e) {
-            e.preventDefault();
-            window.open(this.href, '_blank');
+        document.getElementById('whatsapp-button').addEventListener('click', function() {
+            window.open('https://wa.me/62895402128077', '_blank');
         });
         
         // Login buttons
-        document.querySelectorAll('.btn-secondary').forEach(button => {
-            button.addEventListener('click', function() {
-                const provider = this.querySelector('i').className.includes('google') ? 'Google' : 'Facebook';
-                alert(`Login dengan ${provider} dipilih. Dalam implementasi nyata, ini akan mengarahkan ke proses login ${provider}.`);
-            });
+        document.getElementById('google-login').addEventListener('click', function() {
+            alert('Login dengan Google dipilih. Dalam implementasi nyata, ini akan mengarahkan ke proses login Google.');
+        });
+        
+        document.getElementById('facebook-login').addEventListener('click', function() {
+            alert('Login dengan Facebook dipilih. Dalam implementasi nyata, ini akan mengarahkan ke proses login Facebook.');
+        });
+        
+        // Modal functionality
+        document.querySelector('.close-modal').addEventListener('click', function() {
+            document.getElementById('payment-modal').style.display = 'none';
+        });
+        
+        window.addEventListener('click', function(event) {
+            if (event.target === document.getElementById('payment-modal')) {
+                document.getElementById('payment-modal').style.display = 'none';
+            }
+        });
+        
+        // Promo button
+        document.querySelector('.promo-banner .btn-primary').addEventListener('click', function() {
+            alert('Promo berhasil diklaim! Bonus 20% akan ditambahkan pada pembelian pertama Anda.');
         });
     </script>
 </body>
