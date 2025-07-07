@@ -3,9 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GarzzMarket - Top Up Game Terpercaya</title>
+    <title>GarzVoucher - Top Up Game Terpercaya</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Reset CSS */
+        :root {
+            --primary-blue: #1a73e8;
+            --secondary-blue: #4285f4;
+            --dark-blue: #0d47a1;
+            --light-blue: #e3f2fd;
+            --accent: #ff6d00;
+            --text: #202124;
+            --light-text: #f8f9fa;
+            --gray: #dadce0;
+            --success: #34a853;
+            --card-shadow: 0 8px 20px rgba(26, 115, 232, 0.15);
+        }
+        
         * {
             margin: 0;
             padding: 0;
@@ -13,670 +26,1172 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         
-        /* Variabel Warna */
-        :root {
-            --primary: #1a3b7a;
-            --secondary: #2c5282;
-            --accent: #3498db;
-            --light: #e6f7ff;
-            --dark: #0a1f44;
-            --text: #333;
-            --text-light: #f8f9fa;
-            --success: #28a745;
-            --warning: #ffc107;
-            --danger: #dc3545;
-        }
-        
         body {
-            background: linear-gradient(135deg, var(--light) 0%, #d1e8ff 100%);
+            background: linear-gradient(135deg, #f0f7ff, #e3f2fd);
             color: var(--text);
             line-height: 1.6;
-            min-height: 100vh;
+            overflow-x: hidden;
         }
         
-        /* Header & Navigasi */
         header {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            color: white;
-            padding: 1rem 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            background: linear-gradient(135deg, var(--dark-blue), var(--primary-blue));
+            padding: 1rem 0;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
             position: sticky;
             top: 0;
             z-index: 1000;
         }
         
-        .logo {
-            font-size: 2.2rem;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
         }
         
-        .logo span {
-            color: var(--accent);
-        }
-        
-        .hamburger-menu {
-            position: relative;
-            cursor: pointer;
-            width: 40px;
-            height: 40px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 8px;
-            transition: all 0.3s ease;
-        }
-        
-        .hamburger-menu:hover {
-            background: rgba(255, 255, 255, 0.2);
-        }
-        
-        .hamburger-menu span {
-            display: block;
-            width: 25px;
-            height: 3px;
-            background: white;
-            margin: 2px 0;
-            border-radius: 2px;
-            transition: all 0.3s ease;
-        }
-        
-        /* Menu Overlay */
-        .menu-overlay {
-            position: fixed;
-            top: 0;
-            right: -350px;
-            width: 320px;
-            height: 100vh;
-            background: white;
-            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
-            z-index: 2000;
-            transition: right 0.4s ease;
-            padding: 20px;
-            overflow-y: auto;
-        }
-        
-        .menu-overlay.active {
-            right: 0;
-        }
-        
-        .menu-header {
+        .header-content {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid #eee;
+            flex-wrap: wrap;
         }
         
-        .menu-header h2 {
-            color: var(--primary);
-            font-size: 1.5rem;
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
         
-        .close-menu {
-            background: none;
-            border: none;
+        .logo h1 {
             font-size: 1.8rem;
-            color: var(--dark);
-            cursor: pointer;
-            padding: 5px;
-        }
-        
-        .menu-section {
-            margin-bottom: 25px;
-        }
-        
-        .menu-section h3 {
-            color: var(--primary);
-            margin-bottom: 15px;
-            padding-bottom: 8px;
-            border-bottom: 2px solid var(--accent);
-        }
-        
-        .game-list {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 10px;
-        }
-        
-        .game-item {
-            padding: 10px;
-            background: var(--light);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            transition: all 0.3s ease;
-            border-left: 3px solid var(--accent);
-        }
-        
-        .game-item:hover {
-            background: #d1e8ff;
-            transform: translateX(5px);
-        }
-        
-        .game-icon {
-            width: 30px;
-            height: 30px;
-            background: var(--accent);
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            font-weight: 700;
             color: white;
-            font-weight: bold;
-            font-size: 0.8rem;
         }
         
-        .menu-links {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
+        .logo i {
+            font-size: 2rem;
+            color: white;
         }
         
-        .menu-link {
+        nav ul {
             display: flex;
-            align-items: center;
-            padding: 12px 15px;
-            background: var(--light);
-            border-radius: 8px;
-            color: var(--text);
+            list-style: none;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+        
+        nav a {
+            color: var(--light-text);
             text-decoration: none;
             font-weight: 500;
+            padding: 0.5rem 0.8rem;
+            border-radius: 4px;
             transition: all 0.3s ease;
-            gap: 10px;
+            position: relative;
         }
         
-        .menu-link:hover {
-            background: var(--accent);
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: white;
+            transition: width 0.3s ease;
+        }
+        
+        nav a:hover::after, nav a.active::after {
+            width: 100%;
+        }
+        
+        nav a:hover, nav a.active {
             color: white;
         }
         
-        .menu-link i {
-            font-size: 1.2rem;
+        .user-actions {
+            display: flex;
+            gap: 1rem;
         }
         
-        /* Konten Utama */
+        .btn {
+            padding: 0.8rem 1.5rem;
+            border-radius: 30px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-size: 1rem;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent), #e65100);
+            color: white;
+            box-shadow: var(--card-shadow);
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid white;
+            color: white;
+        }
+        
+        .btn-whatsapp {
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            color: white;
+            box-shadow: var(--card-shadow);
+        }
+        
+        .btn-google {
+            background: linear-gradient(135deg, #4285F4, #34A853);
+            color: white;
+        }
+        
+        .btn-facebook {
+            background: linear-gradient(135deg, #4267B2, #3b5998);
+            color: white;
+        }
+        
+        .btn-blue {
+            background: linear-gradient(135deg, var(--primary-blue), var(--dark-blue));
+            color: white;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .btn:active {
+            transform: translateY(0);
+        }
+        
         .hero {
-            padding: 80px 5% 50px;
-            text-align: center;
-            background: linear-gradient(rgba(26, 59, 122, 0.9), rgba(26, 59, 122, 0.8)), url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80');
+            background: linear-gradient(rgba(26, 115, 232, 0.9), rgba(13, 71, 161, 0.9)), url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1500&q=80');
             background-size: cover;
             background-position: center;
-            color: white;
-            margin-bottom: 50px;
+            padding: 5rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
         }
         
-        .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--accent), #ff9e80);
+        }
+        
+        .hero h2 {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            color: white;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
         }
         
         .hero p {
-            font-size: 1.4rem;
-            max-width: 800px;
-            margin: 0 auto 30px;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-        }
-        
-        .cta-button {
-            display: inline-block;
-            background: var(--accent);
-            color: white;
-            padding: 15px 40px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: bold;
             font-size: 1.2rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-        }
-        
-        .cta-button:hover {
-            background: #2980b9;
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
-        }
-        
-        /* Fitur */
-        .features {
-            padding: 0 5% 60px;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            color: var(--light-text);
         }
         
         .section-title {
             text-align: center;
-            margin-bottom: 50px;
+            margin: 3rem 0;
             position: relative;
+            padding-bottom: 1rem;
         }
         
         .section-title h2 {
-            font-size: 2.5rem;
-            color: var(--primary);
-            display: inline-block;
-            padding-bottom: 15px;
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--dark-blue);
         }
         
-        .section-title h2:after {
+        .section-title::after {
             content: '';
             position: absolute;
             bottom: 0;
             left: 50%;
             transform: translateX(-50%);
-            width: 80px;
+            width: 100px;
             height: 4px;
-            background: var(--accent);
+            background: linear-gradient(90deg, var(--primary-blue), var(--accent));
             border-radius: 2px;
         }
         
-        .feature-grid {
+        .games-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
         }
         
-        .feature-card {
-            background: white;
-            border-radius: 15px;
+        .game-card {
+            background-color: white;
+            border-radius: 10px;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            box-shadow: var(--card-shadow);
             transition: all 0.3s ease;
+            cursor: pointer;
+            border: 1px solid var(--gray);
+            text-align: center;
         }
         
-        .feature-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        .game-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 25px rgba(26, 115, 232, 0.25);
         }
         
-        .feature-img {
-            height: 200px;
-            overflow: hidden;
-        }
-        
-        .feature-img img {
+        .game-card img {
             width: 100%;
-            height: 100%;
+            height: 140px;
             object-fit: cover;
-            transition: all 0.5s ease;
         }
         
-        .feature-card:hover .feature-img img {
-            transform: scale(1.05);
+        .game-card h3 {
+            padding: 1rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            background: var(--light-blue);
         }
         
-        .feature-content {
-            padding: 25px;
+        .diamonds-container {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: var(--card-shadow);
+            padding: 2rem;
+            margin: 2rem 0;
+            border: 1px solid var(--gray);
         }
         
-        .feature-content h3 {
-            color: var(--primary);
-            margin-bottom: 15px;
-            font-size: 1.4rem;
-        }
-        
-        .feature-content p {
-            color: #666;
-            margin-bottom: 20px;
-        }
-        
-        /* Footer */
-        footer {
-            background: var(--dark);
-            color: var(--text-light);
-            padding: 50px 5% 20px;
-        }
-        
-        .footer-grid {
+        .diamonds-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            margin-bottom: 40px;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 1.5rem;
         }
         
-        .footer-col h3 {
-            font-size: 1.3rem;
-            margin-bottom: 20px;
-            color: var(--accent);
+        .diamond-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            text-align: center;
+            border: 1px solid var(--gray);
+            transition: all 0.3s ease;
             position: relative;
-            padding-bottom: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         }
         
-        .footer-col h3:after {
+        .diamond-card::before {
             content: '';
             position: absolute;
-            bottom: 0;
+            top: 0;
             left: 0;
-            width: 50px;
-            height: 3px;
-            background: var(--accent);
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-blue), var(--accent));
         }
         
-        .footer-col p {
-            margin-bottom: 20px;
-            line-height: 1.8;
-        }
-        
-        .social-links {
-            display: flex;
-            gap: 15px;
-        }
-        
-        .social-links a {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            color: white;
-            transition: all 0.3s ease;
-        }
-        
-        .social-links a:hover {
-            background: var(--accent);
+        .diamond-card:hover {
             transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
         }
         
-        .footer-links {
-            list-style: none;
+        .diamond-icon {
+            font-size: 3rem;
+            color: var(--primary-blue);
+            margin-bottom: 0.5rem;
         }
         
-        .footer-links li {
-            margin-bottom: 12px;
+        .diamond-amount {
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--dark-blue);
         }
         
-        .footer-links a {
-            color: #ccc;
-            text-decoration: none;
-            transition: all 0.3s ease;
+        .diamond-price {
+            font-size: 1.3rem;
+            color: var(--success);
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+        }
+        
+        .diamond-original-price {
+            text-decoration: line-through;
+            color: var(--text);
+            font-size: 0.9rem;
+            margin-bottom: 1.2rem;
+            opacity: 0.7;
+        }
+        
+        .payment-methods {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        
+        .payment-method {
+            background-color: white;
+            border-radius: 10px;
+            padding: 1rem 1.5rem;
             display: flex;
             align-items: center;
             gap: 10px;
+            box-shadow: var(--card-shadow);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            min-width: 180px;
         }
         
-        .footer-links a:hover {
-            color: var(--accent);
+        .payment-method:hover, .payment-method.active {
+            border-color: var(--primary-blue);
+            transform: translateY(-5px);
+        }
+        
+        .payment-method i {
+            font-size: 2.2rem;
+        }
+        
+        .payment-method .fa-google-pay { color: #4285F4; }
+        .payment-method .fa-whatsapp { color: #25D366; }
+        .payment-method .fa-credit-card { color: #FF6D00; }
+        
+        .promo-section {
+            background: linear-gradient(135deg, var(--primary-blue), var(--dark-blue));
+            border-radius: 10px;
+            box-shadow: var(--card-shadow);
+            padding: 2rem;
+            margin: 3rem 0;
+            text-align: center;
+            border: 1px solid var(--gray);
+            color: white;
+        }
+        
+        .promo-content {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 2rem;
+            border: 2px dashed rgba(255, 255, 255, 0.3);
+        }
+        
+        .promo-content i {
+            font-size: 3rem;
+            color: #FFD700;
+            margin-bottom: 1rem;
+        }
+        
+        .promo-content h3 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            color: #FFD700;
+        }
+        
+        .promo-content p {
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+        
+        .promo-timer {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 50px;
+            padding: 0.8rem;
+            margin: 1.5rem auto;
+            max-width: 400px;
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+        
+        .timer-item {
+            background: white;
+            color: var(--primary-blue);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-weight: 700;
+            min-width: 60px;
+        }
+        
+        .contact-section {
+            background: linear-gradient(135deg, var(--dark-blue), var(--primary-blue));
+            padding: 4rem 0;
+            margin-top: 3rem;
+            position: relative;
+        }
+        
+        .contact-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+        }
+        
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .contact-info a {
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            justify-content: center;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .contact-info a:hover {
+            color: #FFD700;
             transform: translateX(5px);
         }
         
-        .copyright {
+        footer {
+            background: linear-gradient(135deg, var(--dark-blue), #0d0d0d);
             text-align: center;
-            padding-top: 20px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            color: #aaa;
+            padding: 1.5rem 0;
+            font-size: 0.9rem;
+            color: var(--light-text);
+        }
+        
+        .transaction-section {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: var(--card-shadow);
+            padding: 2rem;
+            margin: 2rem 0;
+            border: 1px solid var(--gray);
+        }
+        
+        .transaction-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+        
+        .transaction-table th, 
+        .transaction-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid var(--gray);
+        }
+        
+        .transaction-table th {
+            background-color: var(--light-blue);
+            color: var(--dark-blue);
+            font-weight: 600;
+        }
+        
+        .transaction-table tr:hover {
+            background-color: rgba(26, 115, 232, 0.05);
+        }
+        
+        .status-completed {
+            color: var(--success);
+            font-weight: 600;
+        }
+        
+        .status-pending {
+            color: #fbbc05;
+            font-weight: 600;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            background: white;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 500px;
+            padding: 2.5rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .modal-header h2 {
+            color: var(--primary-blue);
+            font-size: 1.8rem;
+        }
+        
+        .close-modal {
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: var(--text);
+            transition: all 0.3s ease;
+        }
+        
+        .close-modal:hover {
+            color: var(--primary-blue);
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--text);
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 0.9rem;
+            background-color: var(--light-blue);
+            border: 1px solid var(--gray);
+            border-radius: 6px;
+            font-size: 1rem;
+            color: var(--text);
+        }
+        
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+        }
+        
+        .modal-footer {
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .social-login {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        
+        .social-btn {
+            padding: 0.8rem;
+            border-radius: 6px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-size: 1rem;
+        }
+        
+        .social-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--card-shadow);
+        }
+        
+        .divider {
+            display: flex;
+            align-items: center;
+            text-align: center;
+            margin: 1.5rem 0;
+            color: var(--text);
+        }
+        
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            border-bottom: 1px solid var(--gray);
+        }
+        
+        .divider::before {
+            margin-right: 1rem;
+        }
+        
+        .divider::after {
+            margin-left: 1rem;
+        }
+        
+        .login-links {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 1rem;
             font-size: 0.9rem;
         }
         
-        /* Responsif */
+        .login-links a {
+            color: var(--primary-blue);
+            text-decoration: none;
+        }
+        
+        .login-links a:hover {
+            text-decoration: underline;
+        }
+        
+        .other-games {
+            margin: 3rem 0;
+            text-align: center;
+        }
+        
+        .other-games-btn {
+            margin-top: 1.5rem;
+        }
+        
         @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.5rem;
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
             }
             
-            .hero p {
-                font-size: 1.1rem;
+            nav ul {
+                justify-content: center;
             }
             
-            .section-title h2 {
-                font-size: 2rem;
+            .games-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            }
+            
+            .hero h2 {
+                font-size: 2.2rem;
+            }
+            
+            .diamonds-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            }
+            
+            .payment-methods {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .payment-method {
+                width: 100%;
+            }
+            
+            .hero {
+                padding: 3rem 0;
             }
         }
     </style>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <!-- Header & Navigasi -->
+    <!-- Header Section -->
     <header>
-        <div class="logo">
-            <i class="fas fa-gamepad"></i>
-            Garzz<span>Market</span>
-        </div>
-        <div class="hamburger-menu" id="hamburgerMenu">
-            <span></span>
-            <span></span>
-            <span></span>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-gamepad"></i>
+                    <h1>GarzVoucher</h1>
+                </div>
+                
+                <nav>
+                    <ul>
+                        <li><a href="#" class="active">Beranda</a></li>
+                        <li><a href="#diamonds">Diamonds</a></li>
+                        <li><a href="#games">Games</a></li>
+                        <li><a href="#transactions">Transaksi</a></li>
+                        <li><a href="#promo">Promo</a></li>
+                        <li><a href="#contact">Kontak</a></li>
+                    </ul>
+                </nav>
+                
+                <div class="user-actions">
+                    <button class="btn btn-outline" id="loginBtn">Masuk</button>
+                    <button class="btn btn-primary" id="registerBtn">Daftar</button>
+                </div>
+            </div>
         </div>
     </header>
-    
-    <!-- Menu Overlay -->
-    <div class="menu-overlay" id="menuOverlay">
-        <div class="menu-header">
-            <h2>Menu GarzzMarket</h2>
-            <button class="close-menu" id="closeMenu">
-                <i class="fas fa-times"></i>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h2>Top Up Game Favoritmu dengan GarzVoucher</h2>
+            <p>Diamond, Voucher, dan Item Game - Pembayaran Aman & Proses Instan!</p>
+            <button class="btn btn-primary">
+                Top Up Sekarang <i class="fas fa-arrow-right"></i>
             </button>
         </div>
+    </section>
+
+    <!-- Games Section -->
+    <section id="games" class="container">
+        <div class="section-title">
+            <h2>Pilih Game Favoritmu</h2>
+            <p>Top up diamond untuk game pilihan Anda</p>
+        </div>
+        <div class="games-grid">
+            <div class="game-card">
+                <img src="https://images.unsplash.com/photo-1618336756471-986b7f8a6b4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Free Fire">
+                <h3>Free Fire</h3>
+                <button class="btn btn-blue">Top Up</button>
+            </div>
+            <div class="game-card">
+                <img src="https://images.unsplash.com/photo-1534423861386-85a16f5d13fd?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Deta Force">
+                <h3>Deta Force</h3>
+                <button class="btn btn-blue">Top Up</button>
+            </div>
+            <div class="game-card">
+                <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Garena Undawn">
+                <h3>Garena Undawn</h3>
+                <button class="btn btn-blue">Top Up</button>
+            </div>
+            <div class="game-card">
+                <img src="https://images.unsplash.com/photo-1612287230202-1ff1d85d1bdf?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Call of Duty">
+                <h3>Call of Duty: Mobile</h3>
+                <button class="btn btn-blue">Top Up</button>
+            </div>
+            <div class="game-card">
+                <img src="https://images.unsplash.com/photo-1617802690992-15d93263d3a9?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Arena Of Valor">
+                <h3>Arena Of Valor</h3>
+                <button class="btn btn-blue">Top Up</button>
+            </div>
+        </div>
         
-        <div class="menu-section">
-            <h3><i class="fas fa-gamepad"></i> Top Up Game</h3>
-            <div class="game-list">
-                <div class="game-item">
-                    <div class="game-icon">ML</div>
-                    <div>Mobile Legends: Bang Bang</div>
+        <div class="other-games">
+            <h3>Game Lainnya</h3>
+            <div class="other-games-btn">
+                <button class="btn btn-blue">Mobile Legends</button>
+                <button class="btn btn-blue">PUBG Mobile</button>
+                <button class="btn btn-blue">Valorant</button>
+                <button class="btn btn-blue">Genshin Impact</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Diamonds Section -->
+    <section id="diamonds" class="container">
+        <div class="section-title">
+            <h2>Paket Diamond</h2>
+            <p>Pilih paket diamond sesuai kebutuhan Anda</p>
+        </div>
+        <div class="diamonds-container">
+            <div class="diamonds-grid">
+                <!-- Paket diamond akan di-generate oleh JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Payment Methods -->
+    <section class="container">
+        <div class="section-title">
+            <h2>Metode Pembayaran</h2>
+            <p>Pilih metode pembayaran yang Anda inginkan</p>
+        </div>
+        <div class="payment-methods">
+            <div class="payment-method active">
+                <i class="fab fa-google-pay"></i>
+                <div>
+                    <h3>Gopay</h3>
+                    <p>Pembayaran Instan</p>
                 </div>
-                <div class="game-item">
-                    <div class="game-icon">FF</div>
-                    <div>Free Fire</div>
+            </div>
+            
+            <div class="payment-method">
+                <i class="fab fa-whatsapp"></i>
+                <div>
+                    <h3>Dana</h3>
+                    <p>Pembayaran Instan</p>
                 </div>
-                <div class="game-item">
-                    <div class="game-icon">GR</div>
-                    <div>Garena</div>
+            </div>
+            
+            <div class="payment-method">
+                <i class="fas fa-credit-card"></i>
+                <div>
+                    <h3>OVO</h3>
+                    <p>Pembayaran Instan</p>
                 </div>
-                <div class="game-item">
-                    <div class="game-icon">GI</div>
-                    <div>Genshin Impact</div>
-                </div>
-                <div class="game-item">
-                    <div class="game-icon">CM</div>
-                    <div>Chamet</div>
-                </div>
-                <div class="game-item">
-                    <div class="game-icon">PL</div>
-                    <div>Poppo Live</div>
-                </div>
-                <div class="game-item">
-                    <div class="game-icon">ZZ</div>
-                    <div>Zenless Zone Zero</div>
-                </div>
-                <div class="game-item">
-                    <div class="game-icon">HK</div>
-                    <div>Honor of Kings</div>
-                </div>
-                <div class="game-item">
-                    <div class="game-icon">PM</div>
-                    <div>PUBG Mobile</div>
-                </div>
-                <div class="game-item">
-                    <div class="game-icon">VL</div>
-                    <div>VALORANT</div>
-                </div>
-                <div class="game-item">
-                    <div class="game-icon">CD</div>
-                    <div>Call of Duty: Mobile</div>
-                </div>
-                <div class="game-item">
-                    <div class="game-icon">CS</div>
-                    <div>Call of Duty: Mobile Garena Shells Voucher</div>
-                </div>
-                <div class="game-item">
-                    <div class="game-icon">HG</div>
-                    <div>HAGO</div>
-                </div>
-                <div class="game-item">
-                    <div class="game-icon">FC</div>
-                    <div>EA SPORTS FC Mobile</div>
-                </div>
-                <div class="game-item">
-                    <div class="game-icon">UD</div>
-                    <div>Undawn</div>
-                </div>
-                <div class="game-item">
-                    <div class="game-icon">LOL</div>
-                    <div>League of Legends</div>
-                </div>
-                <div class="game-item">
-                    <div class="game-icon">SS</div>
-                    <div>Super Sus</div>
-                </div>
-                <div class="game-item">
-                    <div class="game-icon">AO</div>
-                    <div>AOV</div>
-                </div>
-                <div class="game-item">
-                    <div class="game-icon">FM</div>
-                    <div>Free Fire MAX</div>
-                </div>
-                <div class="game-item">
-                    <div class="game-icon">RI</div>
-                    <div>Revelation: Infinite Journey</div>
+            </div>
+            
+            <div class="payment-method">
+                <i class="fab fa-cc-visa"></i>
+                <div>
+                    <h3>ShopeePay</h3>
+                    <p>Pembayaran Instan</p>
                 </div>
             </div>
         </div>
         
-        <div class="menu-section">
-            <h3><i class="fas fa-exchange-alt"></i> Menu Lainnya</h3>
-            <div class="menu-links">
-                <a href="#" class="menu-link">
-                    <i class="fas fa-receipt"></i>
-                    <span>Cek Transaksi</span>
+        <div style="text-align: center; margin-top: 2rem;">
+            <button class="btn btn-primary">
+                Konfirmasi Pembayaran <i class="fas fa-check-circle"></i>
+            </button>
+        </div>
+    </section>
+
+    <!-- Transactions Section -->
+    <section id="transactions" class="container">
+        <div class="section-title">
+            <h2>Riwayat Transaksi</h2>
+            <p>Pantau semua transaksi top up Anda</p>
+        </div>
+        <div class="transaction-section">
+            <p>Login untuk melihat riwayat transaksi Anda</p>
+            <table class="transaction-table">
+                <thead>
+                    <tr>
+                        <th>ID Transaksi</th>
+                        <th>Game</th>
+                        <th>Paket</th>
+                        <th>Tanggal</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>TRX-20230707-001</td>
+                        <td>Free Fire</td>
+                        <td>100 Diamonds</td>
+                        <td>07 Jul 2023</td>
+                        <td class="status-completed">Selesai</td>
+                    </tr>
+                    <tr>
+                        <td>TRX-20230705-045</td>
+                        <td>Call of Duty</td>
+                        <td>80 Diamonds</td>
+                        <td>05 Jul 2023</td>
+                        <td class="status-completed">Selesai</td>
+                    </tr>
+                    <tr>
+                        <td>TRX-20230703-112</td>
+                        <td>Arena Of Valor</td>
+                        <td>130 Diamonds</td>
+                        <td>03 Jul 2023</td>
+                        <td class="status-completed">Selesai</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div style="text-align: center; margin-top: 1.5rem;">
+                <button class="btn btn-blue">
+                    Lihat Semua Transaksi <i class="fas fa-history"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Promo Section -->
+    <section id="promo" class="container">
+        <div class="section-title">
+            <h2>Promo Spesial</h2>
+            <p>Dapatkan penawaran terbaik untuk pembelian diamond</p>
+        </div>
+        <div class="promo-section">
+            <div class="promo-content">
+                <i class="fas fa-tag"></i>
+                <h3>Promo Spesial Akhir Bulan!</h3>
+                <p>Dapatkan diskon tambahan 15% untuk semua pembelian diamond di atas 100💎</p>
+                <p>Promo berlaku hingga:</p>
+                
+                <div class="promo-timer">
+                    <div class="timer-item">31</div>
+                    <div>Juli</div>
+                    <div class="timer-item">2023</div>
+                </div>
+                
+                <button class="btn btn-primary">
+                    Klaim Promo Sekarang <i class="fas fa-gift"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <div class="contact-content">
+                <div class="section-title">
+                    <h2 style="color: white;">Hubungi Kami</h2>
+                    <p style="color: rgba(255, 255, 255, 0.8);">Butuh bantuan? Tim kami siap membantu Anda</p>
+                </div>
+                <div class="contact-info">
+                    <a href="mailto:garzvoucher@gmail.com">
+                        <i class="fas fa-envelope"></i> garzvoucher@gmail.com
+                    </a>
+                    <a href="https://wa.me/62895402128077" target="_blank">
+                        <i class="fab fa-whatsapp"></i> +62 895-4021-28077
+                    </a>
+                </div>
+                <a href="https://wa.me/62895402128077" target="_blank" class="btn btn-whatsapp">
+                    <i class="fab fa-whatsapp"></i> Chat via WhatsApp
                 </a>
-                <a href="#" class="menu-link">
-                    <i class="fas fa-sign-in-alt"></i>
-                    <span>Masuk/Daftar</span>
-                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 GarzVoucher. All rights reserved.</p>
+            <p>Top Up Game Termurah dan Terpercaya</p>
+        </div>
+    </footer>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Masuk ke Akun</h2>
+                <span class="close-modal">&times;</span>
+            </div>
+            
+            <div class="social-login">
+                <button class="social-btn btn-google" id="googleLogin">
+                    <i class="fab fa-google"></i> Masuk dengan Google
+                </button>
+                <button class="social-btn btn-facebook" id="facebookLogin">
+                    <i class="fab fa-facebook-f"></i> Masuk dengan Facebook
+                </button>
+            </div>
+            
+            <div class="divider">atau</div>
+            
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" placeholder="Email Anda">
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" placeholder="Password">
+            </div>
+            <div class="login-links">
+                <a href="#">Lupa Password?</a>
+                <a href="#" id="showRegister">Buat Akun Baru</a>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline">Batal</button>
+                <button class="btn btn-primary">Masuk</button>
             </div>
         </div>
     </div>
-    
-    <!-- Hero Section -->
-    <section class="hero">
-        <h1>Top Up Game Mudah & Cepat</h1>
-        <p>Isi diamond, koin, dan mata uang game favorit Anda dengan harga terbaik dan proses instan hanya di GarzzMarket</p>
-        <a href="#" class="cta-button">Top Up Sekarang <i class="fas fa-arrow-right"></i></a>
-    </section>
-    
-    <!-- Fitur -->
-    <section class="features">
-        <div class="section-title">
-            <h2>Mengapa Memilih GarzzMarket?</h2>
-        </div>
-        
-        <div class="feature-grid">
-            <div class="feature-card">
-                <div class="feature-img">
-                    <img src="https://images.unsplash.com/photo-1551103782-8ab07afd45c1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" alt="Proses Cepat">
-                </div>
-                <div class="feature-content">
-                    <h3>Proses Instan 24/7</h3>
-                    <p>Top up game kapan saja, proses hanya membutuhkan waktu 1-3 menit setelah pembayaran berhasil.</p>
-                    <a href="#" class="menu-link">Pelajari Lebih Lanjut</a>
-                </div>
+
+    <!-- Register Modal -->
+    <div id="registerModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Buat Akun Baru</h2>
+                <span class="close-modal">&times;</span>
             </div>
             
-            <div class="feature-card">
-                <div class="feature-img">
-                    <img src="https://images.unsplash.com/photo-1584438784894-089d6a62b8fa?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" alt="Harga Terbaik">
-                </div>
-                <div class="feature-content">
-                    <h3>Harga Terbaik</h3>
-                    <p>Kami menawarkan harga top up termurah dibandingkan toko lainnya dengan bonus dan promo menarik.</p>
-                    <a href="#" class="menu-link">Lihat Harga</a>
-                </div>
+            <div class="social-login">
+                <button class="social-btn btn-google" id="googleRegister">
+                    <i class="fab fa-google"></i> Daftar dengan Google
+                </button>
+                <button class="social-btn btn-facebook" id="facebookRegister">
+                    <i class="fab fa-facebook-f"></i> Daftar dengan Facebook
+                </button>
             </div>
             
-            <div class="feature-card">
-                <div class="feature-img">
-                    <img src="https://images.unsplash.com/photo-1563014959-7aaa83350992?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" alt="Aman & Terpercaya">
-                </div>
-                <div class="feature-content">
-                    <h3>Aman & Terpercaya</h3>
-                    <p>Lebih dari 500.000 transaksi berhasil dengan aman. Data pembeli dijamin kerahasiaannya.</p>
-                    <a href="#" class="menu-link">Baca Testimoni</a>
-                </div>
+            <div class="divider">atau</div>
+            
+            <div class="form-group">
+                <label for="fullname">Nama Lengkap</label>
+                <input type="text" id="fullname" placeholder="Nama Lengkap">
+            </div>
+            <div class="form-group">
+                <label for="reg-email">Email</label>
+                <input type="email" id="reg-email" placeholder="Email Anda">
+            </div>
+            <div class="form-group">
+                <label for="reg-password">Password</label>
+                <input type="password" id="reg-password" placeholder="Password">
+            </div>
+            <div class="form-group">
+                <label for="confirm-password">Konfirmasi Password</label>
+                <input type="password" id="confirm-password" placeholder="Konfirmasi Password">
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline">Batal</button>
+                <button class="btn btn-primary">Daftar</button>
             </div>
         </div>
-    </section>
-    
-    <!-- Footer -->
-    <footer>
-        <div class="footer-grid">
-            <div class="footer-col">
-                <h3>Tentang GarzzMarket</h3>
-                <p>GarzzMarket adalah platform top up game terpercaya yang menyediakan layanan pengisian koin, diamond, dan mata uang game dengan harga terbaik dan proses instan.</p>
-                <div class="social-links">
-                    <a href="#"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-youtube"></i></a>
-                </div>
-            </div>
-            
-            <div class="footer-col">
-                <h3>Game Populer</h3>
-                <ul class="footer-links">
-                    <li><a href="#"><i class="fas fa-chevron-right"></i> Mobile Legends</a></li>
-                    <li><a href="#"><i class="fas fa-chevron-right"></i> Free Fire</a></li>
-                    <li><a href="#"><i class="fas fa-chevron-right"></i> Genshin Impact</a></li>
-                    <li><a href="#"><i class="fas fa-chevron-right"></i> PUBG Mobile</a></li>
-                    <li><a href="#"><i class="fas fa-chevron-right"></i> Valorant</a></li>
-                </ul>
-            </div>
-            
-            <div class="footer-col">
-                <h3>Layanan Kami</h3>
-                <ul class="footer-links">
-                    <li><a href="#"><i class="fas fa-chevron-right"></i> Top Up Game</a></li>
-                    <li><a href="#"><i class="fas fa-chevron-right"></i> Cek Transaksi</a></li>
-                    <li><a href="#"><i class="fas fa-chevron-right"></i> Panduan Pembelian</a></li>
-                    <li><a href="#"><i class="fas fa-chevron-right"></i> Promo & Event</a></li>
-                    <li><a href="#"><i class="fas fa-chevron-right"></i> Dukungan Pelanggan</a></li>
-                </ul>
-            </div>
-            
-            <div class="footer-col">
-                <h3>Kontak Kami</h3>
-                <ul class="footer-links">
-                    <li><i class="fas fa-envelope"></i> support@garzzmarket.com</li>
-                    <li><i class="fas fa-phone"></i> +62 21 1234 5678</li>
-                    <li><i class="fas fa-map-marker-alt"></i> Jakarta, Indonesia</li>
-                    <li><i class="fas fa-clock"></i> Senin-Minggu, 24 Jam</li>
-                </ul>
-            </div>
-        </div>
-        
-        <div class="copyright">
-            <p>&copy; 2023 GarzzMarket. Hak Cipta Dilindungi.</p>
-        </div>
-    </footer>
-    
+    </div>
+
     <script>
-        // Fungsi untuk toggle menu
-        const hamburgerMenu = document.getElementById('hamburgerMenu');
-        const menuOverlay = document.getElementById('menuOverlay');
-        const closeMenu = document.getElementById('closeMenu');
+        // Data paket diamond
+        const diamondPackages = [
+            { amount: "10 Diamonds", price: "Rp 1.990", original: "Dari: Rp 2.500" },
+            { amount: "12 Diamonds", price: "Rp 1.908", original: "Dari: Rp 2.300" },
+            { amount: "55 Diamonds", price: "Rp 12.000", original: "Dari: Rp 15.000" },
+            { amount: "70 Diamonds", price: "Rp 15.917", original: "Dari: Rp 19.000" },
+            { amount: "80 Diamonds", price: "Rp 12.000", original: "Hemat: Rp 3.000" },
+            { amount: "100 Diamonds", price: "Rp 15.917", original: "Dari: Rp 18.500" },
+            { amount: "120 Diamonds", price: "Rp 17.789", original: "Dari: Rp 21.000" },
+            { amount: "130 Diamonds", price: "Rp 19.662", original: "Dari: Rp 23.500" },
+            { amount: "140 Diamonds", price: "Rp 20.483", original: "Dari: Rp 24.500" },
+            { amount: "150 Diamonds", price: "Rp 21.979", original: "Dari: Rp 26.500" },
+            { amount: "190 Diamonds", price: "Rp 24.382", original: "Dari: Rp 29.000" },
+            { amount: "270 Diamonds", price: "Rp 31.232", original: "Dari: Rp 37.500" },
+            { amount: "1100 Diamonds", price: "Rp 52.233", original: "Dari: Rp 63.000" }
+        ];
         
-        hamburgerMenu.addEventListener('click', () => {
-            menuOverlay.classList.add('active');
+        // Generate diamond packages
+        const diamondsGrid = document.querySelector('.diamonds-grid');
+        diamondsGrid.innerHTML = '';
+        
+        diamondPackages.forEach(pkg => {
+            const diamondCard = document.createElement('div');
+            diamondCard.className = 'diamond-card';
+            diamondCard.innerHTML = `
+                <div class="diamond-icon">💎</div>
+                <div class="diamond-amount">${pkg.amount}</div>
+                <div class="diamond-price">${pkg.price}</div>
+                <div class="diamond-original-price">${pkg.original}</div>
+                <button class="btn btn-primary">Beli Sekarang</button>
+            `;
+            diamondsGrid.appendChild(diamondCard);
         });
         
-        closeMenu.addEventListener('click', () => {
-            menuOverlay.classList.remove('active');
+        // Modal functionality
+        const loginModal = document.getElementById('loginModal');
+        const registerModal = document.getElementById('registerModal');
+        const loginBtn = document.getElementById('loginBtn');
+        const registerBtn = document.getElementById('registerBtn');
+        const showRegister = document.getElementById('showRegister');
+        const closeButtons = document.querySelectorAll('.close-modal, .btn-outline');
+        
+        loginBtn.addEventListener('click', () => {
+            loginModal.style.display = 'flex';
         });
         
-        // Tutup menu saat klik di luar area menu
-        document.addEventListener('click', (event) => {
-            if (!menuOverlay.contains(event.target) && !hamburgerMenu.contains(event.target)) {
-                menuOverlay.classList.remove('active');
-            }
+        registerBtn.addEventListener('click', () => {
+            registerModal.style.display = 'flex';
+        });
+        
+        showRegister.addEventListener('click', (e) => {
+            e.preventDefault();
+            loginModal.style.display = 'none';
+            registerModal.style.display = 'flex';
+        });
+        
+        closeButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                loginModal.style.display = 'none';
+                registerModal.style.display = 'none';
+            });
+        });
+        
+        window.addEventListener('click', (e) => {
+            if (e.target === loginModal) loginModal.style.display = 'none';
+            if (e.target === registerModal) registerModal.style.display = 'none';
+        });
+        
+        // Payment method selection
+        const paymentMethods = document.querySelectorAll('.payment-method');
+        paymentMethods.forEach(method => {
+            method.addEventListener('click', () => {
+                paymentMethods.forEach(m => m.classList.remove('active'));
+                method.classList.add('active');
+            });
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Login with Google
+        document.getElementById('googleLogin').addEventListener('click', function() {
+            alert('Login dengan Google: Silakan gunakan akun Google Anda untuk masuk ke GarzVoucher');
+        });
+        
+        document.getElementById('googleRegister').addEventListener('click', function() {
+            alert('Daftar dengan Google: Silakan gunakan akun Google Anda untuk membuat akun GarzVoucher');
+        });
+        
+        // Login with Facebook
+        document.getElementById('facebookLogin').addEventListener('click', function() {
+            alert('Login dengan Facebook: Silakan gunakan akun Facebook Anda untuk masuk ke GarzVoucher');
+        });
+        
+        document.getElementById('facebookRegister').addEventListener('click', function() {
+            alert('Daftar dengan Facebook: Silakan gunakan akun Facebook Anda untuk membuat akun GarzVoucher');
+        });
+        
+        // Animasi saat halaman dimuat
+        window.addEventListener('load', () => {
+            document.querySelector('.hero').style.opacity = '1';
+            document.querySelector('.hero').style.transform = 'translateY(0)';
+        });
+        
+        // Animasi scroll
+        const animateOnScroll = () => {
+            const elements = document.querySelectorAll('.game-card, .diamond-card, .payment-method, .promo-section');
+            elements.forEach(element => {
+                const elementPosition = element.getBoundingClientRect().top;
+                const screenPosition = window.innerHeight / 1.3;
+                
+                if (elementPosition < screenPosition) {
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                }
+            });
+        };
+        
+        // Inisialisasi animasi
+        window.addEventListener('scroll', animateOnScroll);
+        document.querySelectorAll('.game-card, .diamond-card, .payment-method, .promo-section').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+        });
+        
+        // Jalankan animasi pertama kali
+        setTimeout(animateOnScroll, 300);
+        
+        // Tombol beli diamond
+        document.querySelectorAll('.diamond-card .btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                alert('Pilih metode pembayaran dan konfirmasi pembelian di bagian Metode Pembayaran');
+            });
         });
     </script>
 </body>
