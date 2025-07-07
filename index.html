@@ -14,6 +14,7 @@
             --light: #f0f8ff;
             --gray: #e0e0e0;
             --success: #28a745;
+            --discount: #ff6b6b;
         }
         
         * {
@@ -27,11 +28,12 @@
             background: linear-gradient(135deg, var(--primary-blue), var(--dark));
             color: var(--light);
             min-height: 100vh;
+            line-height: 1.6;
         }
         
         /* Header & Navigation */
         header {
-            background-color: rgba(10, 31, 68, 0.9);
+            background-color: rgba(10, 31, 68, 0.95);
             padding: 1rem 2rem;
             display: flex;
             justify-content: space-between;
@@ -97,15 +99,16 @@
         
         /* Hero Section */
         .hero {
-            padding: 3rem 2rem;
+            padding: 4rem 2rem 3rem;
             text-align: center;
             background: linear-gradient(rgba(10, 31, 68, 0.7), rgba(10, 31, 68, 0.9)), url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80');
             background-size: cover;
             background-position: center;
+            position: relative;
         }
         
         .hero h2 {
-            font-size: 2.5rem;
+            font-size: 2.8rem;
             margin-bottom: 1rem;
             text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
         }
@@ -118,11 +121,12 @@
         
         .promo-badge {
             background: linear-gradient(45deg, #ff8a00, #ff2070);
-            padding: 0.5rem 1.5rem;
+            padding: 0.8rem 2rem;
             border-radius: 30px;
             display: inline-block;
             margin-bottom: 1.5rem;
             font-weight: bold;
+            font-size: 1.1rem;
             box-shadow: 0 4px 15px rgba(255, 138, 0, 0.3);
         }
         
@@ -136,15 +140,29 @@
         .section-title {
             text-align: center;
             margin-bottom: 2rem;
-            font-size: 2rem;
+            font-size: 2.2rem;
             color: var(--accent-blue);
             text-shadow: 0 0 10px rgba(42, 92, 176, 0.5);
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: var(--accent-blue);
+            border-radius: 3px;
         }
         
         .games-container {
             display: flex;
             justify-content: center;
-            gap: 2rem;
+            gap: 2.5rem;
             flex-wrap: wrap;
             margin-bottom: 3rem;
         }
@@ -153,8 +171,8 @@
             background: rgba(26, 61, 124, 0.6);
             border-radius: 15px;
             overflow: hidden;
-            width: 300px;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+            width: 320px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
             transition: transform 0.3s ease;
         }
         
@@ -169,13 +187,13 @@
         }
         
         .game-header h3 {
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             margin-bottom: 0.5rem;
         }
         
         .diamonds-container {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
             gap: 1rem;
             padding: 1.5rem;
         }
@@ -187,6 +205,8 @@
             text-align: center;
             cursor: pointer;
             transition: all 0.2s ease;
+            position: relative;
+            overflow: hidden;
         }
         
         .diamond-item:hover {
@@ -195,54 +215,72 @@
         }
         
         .diamond-item i {
-            font-size: 2rem;
+            font-size: 2.2rem;
             margin-bottom: 0.5rem;
             color: #ffd700;
+            text-shadow: 0 0 8px rgba(255, 215, 0, 0.5);
         }
         
         .diamond-price {
             font-weight: bold;
             color: #ffd700;
+            font-size: 1.1rem;
         }
         
         .diamond-original {
             text-decoration: line-through;
             color: var(--gray);
             font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        .discount-badge {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: var(--discount);
+            color: white;
+            padding: 5px 10px;
+            font-size: 0.8rem;
+            border-radius: 15px;
+            transform: rotate(15deg);
         }
         
         /* Payment Methods */
         .payment-section {
-            background: rgba(17, 17, 17, 0.8);
+            background: rgba(17, 17, 17, 0.85);
             padding: 3rem 2rem;
+            text-align: center;
         }
         
         .payment-methods {
             display: flex;
             justify-content: center;
-            gap: 1.5rem;
+            gap: 1.8rem;
             flex-wrap: wrap;
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto 2rem;
         }
         
         .payment-method {
             background: rgba(42, 92, 176, 0.3);
-            border-radius: 10px;
-            padding: 1rem;
-            width: 120px;
+            border-radius: 12px;
+            padding: 1.2rem;
+            width: 130px;
             text-align: center;
             transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
         
         .payment-method:hover {
-            transform: translateY(-5px);
+            transform: translateY(-8px);
             background: var(--accent-blue);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
         }
         
         .payment-method i {
-            font-size: 3rem;
-            margin-bottom: 0.5rem;
+            font-size: 3.2rem;
+            margin-bottom: 0.8rem;
         }
         
         /* Contact Section */
@@ -254,7 +292,7 @@
         
         .contact-container {
             display: flex;
-            gap: 2rem;
+            gap: 2.5rem;
             flex-wrap: wrap;
         }
         
@@ -266,6 +304,7 @@
         .contact-info h3 {
             margin-bottom: 1.5rem;
             color: var(--accent-blue);
+            font-size: 1.5rem;
         }
         
         .contact-detail {
@@ -274,12 +313,18 @@
             gap: 1rem;
             margin-bottom: 1.5rem;
             background: rgba(26, 61, 124, 0.3);
-            padding: 1rem;
+            padding: 1.2rem;
             border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .contact-detail:hover {
+            background: rgba(26, 61, 124, 0.5);
+            transform: translateX(5px);
         }
         
         .contact-detail i {
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             color: var(--accent-blue);
         }
         
@@ -287,26 +332,28 @@
             display: inline-block;
             background: #25D366;
             color: white;
-            padding: 0.8rem 1.5rem;
+            padding: 1rem 2rem;
             border-radius: 30px;
             text-decoration: none;
             font-weight: bold;
             margin-top: 1rem;
             transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
         }
         
         .whatsapp-btn:hover {
             background: #128C7E;
-            transform: translateY(-3px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transform: translateY(-5px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
         }
         
         .contact-form {
             flex: 1;
             min-width: 300px;
             background: rgba(26, 61, 124, 0.3);
-            padding: 2rem;
+            padding: 2.5rem;
             border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
         }
         
         .form-group {
@@ -315,41 +362,44 @@
         
         .form-group label {
             display: block;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.8rem;
             font-weight: 500;
+            font-size: 1.1rem;
         }
         
         .form-control {
             width: 100%;
-            padding: 0.8rem;
-            border-radius: 8px;
+            padding: 1rem;
+            border-radius: 10px;
             border: 1px solid var(--accent-blue);
             background: rgba(10, 31, 68, 0.5);
             color: white;
+            font-size: 1rem;
         }
         
         .form-control:focus {
             outline: none;
             border-color: #4d9eff;
-            box-shadow: 0 0 8px rgba(77, 158, 255, 0.5);
+            box-shadow: 0 0 10px rgba(77, 158, 255, 0.7);
         }
         
         .send-btn {
             background: var(--accent-blue);
             color: white;
             border: none;
-            padding: 1rem 2rem;
+            padding: 1.2rem 2rem;
             border-radius: 30px;
             font-weight: bold;
             cursor: pointer;
             width: 100%;
             transition: all 0.3s ease;
+            font-size: 1.1rem;
         }
         
         .send-btn:hover {
             background: #1e4ca1;
             transform: translateY(-3px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
         }
         
         /* Registration Section */
@@ -363,42 +413,44 @@
             background: rgba(26, 61, 124, 0.6);
             padding: 2.5rem;
             border-radius: 15px;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
         }
         
         .register-header {
             text-align: center;
-            margin-bottom: 2rem;
+            margin-bottom: 2.5rem;
         }
         
         .register-header h3 {
             color: var(--accent-blue);
             margin-bottom: 0.5rem;
+            font-size: 1.8rem;
         }
         
         .register-form {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
+            gap: 1.8rem;
         }
         
         .social-login {
             display: flex;
             justify-content: center;
-            gap: 1.5rem;
-            margin: 2rem 0;
+            gap: 1.8rem;
+            margin: 2.5rem 0;
         }
         
         .social-btn {
             display: flex;
             align-items: center;
-            gap: 10px;
-            padding: 0.8rem 1.5rem;
+            gap: 12px;
+            padding: 1rem 1.8rem;
             border-radius: 30px;
             border: none;
             font-weight: bold;
             cursor: pointer;
             transition: all 0.3s ease;
+            font-size: 1.1rem;
         }
         
         .google-btn {
@@ -412,43 +464,52 @@
         }
         
         .social-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transform: translateY(-5px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
         }
         
         .agreement {
             display: flex;
             align-items: center;
-            gap: 10px;
-            margin: 1.5rem 0;
+            gap: 12px;
+            margin: 2rem 0;
+            font-size: 1.1rem;
         }
         
         .register-btn {
             background: var(--accent-blue);
             color: white;
             border: none;
-            padding: 1rem;
+            padding: 1.2rem;
             border-radius: 30px;
             font-weight: bold;
             cursor: pointer;
             transition: all 0.3s ease;
-            font-size: 1.1rem;
+            font-size: 1.2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
         }
         
         .register-btn:hover {
             background: #1e4ca1;
-            transform: translateY(-3px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
         }
         
         .login-link {
             text-align: center;
-            margin-top: 1.5rem;
+            margin-top: 1.8rem;
+            font-size: 1.1rem;
         }
         
         .login-link a {
             color: #4d9eff;
             text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .login-link a:hover {
+            text-decoration: underline;
         }
         
         /* Footer */
@@ -456,6 +517,7 @@
             background: var(--dark);
             padding: 3rem 2rem 2rem;
             text-align: center;
+            margin-top: 3rem;
         }
         
         .footer-content {
@@ -463,14 +525,14 @@
             margin: 0 auto;
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
+            gap: 2.5rem;
             text-align: left;
         }
         
         .footer-column h4 {
             color: var(--accent-blue);
             margin-bottom: 1.5rem;
-            font-size: 1.3rem;
+            font-size: 1.4rem;
         }
         
         .footer-links {
@@ -478,13 +540,14 @@
         }
         
         .footer-links li {
-            margin-bottom: 0.8rem;
+            margin-bottom: 1rem;
         }
         
         .footer-links a {
             color: var(--gray);
             text-decoration: none;
             transition: all 0.3s ease;
+            font-size: 1.1rem;
         }
         
         .footer-links a:hover {
@@ -496,6 +559,7 @@
             margin-top: 3rem;
             padding-top: 1.5rem;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 1.1rem;
         }
         
         /* Modal */
@@ -506,7 +570,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.8);
+            background: rgba(0, 0, 0, 0.9);
             z-index: 1000;
             justify-content: center;
             align-items: center;
@@ -519,14 +583,16 @@
             width: 90%;
             max-width: 500px;
             position: relative;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+            overflow-y: auto;
+            max-height: 90vh;
         }
         
         .close-modal {
             position: absolute;
             top: 1rem;
             right: 1.5rem;
-            font-size: 1.8rem;
+            font-size: 2rem;
             cursor: pointer;
             color: var(--gray);
             transition: all 0.3s ease;
@@ -535,6 +601,141 @@
         .close-modal:hover {
             color: var(--accent-blue);
             transform: rotate(90deg);
+        }
+        
+        /* Purchase Form */
+        .purchase-container {
+            padding: 2rem;
+            background: rgba(26, 61, 124, 0.6);
+            border-radius: 15px;
+            margin-top: 2rem;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .purchase-step {
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .purchase-step h3 {
+            color: var(--accent-blue);
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+        
+        .purchase-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            background: rgba(42, 92, 176, 0.3);
+            padding: 1.2rem;
+            border-radius: 10px;
+        }
+        
+        .purchase-item i {
+            font-size: 2.5rem;
+            color: #ffd700;
+        }
+        
+        .quantity-control {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .quantity-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--accent-blue);
+            color: white;
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .quantity-input {
+            width: 60px;
+            padding: 0.5rem;
+            text-align: center;
+            background: rgba(10, 31, 68, 0.5);
+            border: 1px solid var(--accent-blue);
+            border-radius: 8px;
+            color: white;
+            font-size: 1.1rem;
+        }
+        
+        .payment-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .payment-option {
+            background: rgba(42, 92, 176, 0.3);
+            border-radius: 10px;
+            padding: 1rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .payment-option:hover {
+            background: var(--accent-blue);
+        }
+        
+        .payment-option.active {
+            background: var(--accent-blue);
+            box-shadow: 0 0 10px rgba(42, 92, 176, 0.7);
+        }
+        
+        .promo-container {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .promo-input {
+            flex: 1;
+            padding: 0.8rem;
+            border-radius: 8px;
+            border: 1px solid var(--accent-blue);
+            background: rgba(10, 31, 68, 0.5);
+            color: white;
+        }
+        
+        .apply-btn {
+            background: var(--accent-blue);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .apply-btn:hover {
+            background: #1e4ca1;
+        }
+        
+        .help-link {
+            display: block;
+            text-align: center;
+            margin-top: 2rem;
+            color: #4d9eff;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        .help-link:hover {
+            text-decoration: underline;
         }
         
         /* Responsive */
@@ -566,6 +767,15 @@
             
             .hero p {
                 font-size: 1rem;
+            }
+            
+            .games-container {
+                gap: 1.5rem;
+            }
+            
+            .social-login {
+                flex-direction: column;
+                gap: 1rem;
             }
         }
     </style>
@@ -614,6 +824,7 @@
                 </div>
                 <div class="diamonds-container">
                     <div class="diamond-item">
+                        <div class="discount-badge">DISKON</div>
                         <i class="fas fa-gem"></i>
                         <div>10 Diamonds</div>
                         <div class="diamond-original">Rp 1990</div>
@@ -631,18 +842,21 @@
                         <div class="diamond-price">Rp 15.917</div>
                     </div>
                     <div class="diamond-item">
+                        <div class="discount-badge">DISKON</div>
                         <i class="fas fa-gem"></i>
                         <div>120 Diamonds</div>
                         <div class="diamond-original">Rp 17.789</div>
                         <div class="diamond-price">Rp 15.120</div>
                     </div>
                     <div class="diamond-item">
+                        <div class="discount-badge">DISKON</div>
                         <i class="fas fa-gem"></i>
                         <div>150 Diamonds</div>
                         <div class="diamond-original">Rp 21.979</div>
                         <div class="diamond-price">Rp 18.682</div>
                     </div>
                     <div class="diamond-item">
+                        <div class="discount-badge">DISKON</div>
                         <i class="fas fa-gem"></i>
                         <div>270 Diamonds</div>
                         <div class="diamond-original">Rp 31.232</div>
@@ -659,6 +873,7 @@
                 </div>
                 <div class="diamonds-container">
                     <div class="diamond-item">
+                        <div class="discount-badge">DISKON</div>
                         <i class="fas fa-gem"></i>
                         <div>12 Diamonds</div>
                         <div class="diamond-original">Rp 1.908</div>
@@ -675,18 +890,21 @@
                         <div class="diamond-price">Rp 12.000</div>
                     </div>
                     <div class="diamond-item">
+                        <div class="discount-badge">DISKON</div>
                         <i class="fas fa-gem"></i>
                         <div>130 Diamonds</div>
                         <div class="diamond-original">Rp 19.662</div>
                         <div class="diamond-price">Rp 16.713</div>
                     </div>
                     <div class="diamond-item">
+                        <div class="discount-badge">DISKON</div>
                         <i class="fas fa-gem"></i>
                         <div>140 Diamonds</div>
                         <div class="diamond-original">Rp 20.483</div>
                         <div class="diamond-price">Rp 17.410</div>
                     </div>
                     <div class="diamond-item">
+                        <div class="discount-badge">DISKON</div>
                         <i class="fas fa-gem"></i>
                         <div>190 Diamonds</div>
                         <div class="diamond-original">Rp 24.382</div>
@@ -713,24 +931,28 @@
                         <div class="diamond-price">Rp 15.917</div>
                     </div>
                     <div class="diamond-item">
+                        <div class="discount-badge">DISKON</div>
                         <i class="fas fa-gem"></i>
                         <div>120 Diamonds</div>
                         <div class="diamond-original">Rp 17.789</div>
                         <div class="diamond-price">Rp 15.120</div>
                     </div>
                     <div class="diamond-item">
+                        <div class="discount-badge">DISKON</div>
                         <i class="fas fa-gem"></i>
                         <div>140 Diamonds</div>
                         <div class="diamond-original">Rp 20.483</div>
                         <div class="diamond-price">Rp 17.410</div>
                     </div>
                     <div class="diamond-item">
+                        <div class="discount-badge">DISKON</div>
                         <i class="fas fa-gem"></i>
                         <div>150 Diamonds</div>
                         <div class="diamond-original">Rp 21.979</div>
                         <div class="diamond-price">Rp 18.682</div>
                     </div>
                     <div class="diamond-item">
+                        <div class="discount-badge">DISKON</div>
                         <i class="fas fa-gem"></i>
                         <div>1100 Diamonds</div>
                         <div class="diamond-original">Rp 52.233</div>
@@ -768,7 +990,7 @@
             </div>
         </div>
         
-        <p style="text-align: center; max-width: 800px; margin: 0 auto;">
+        <p style="text-align: center; max-width: 800px; margin: 0 auto; font-size: 1.1rem;">
             <strong>Pembayaran Otomatis:</strong> Saat melakukan pembelian diamond, sistem akan otomatis memilih metode pembayaran terbaik untuk Anda (Dana, OVO, Gopay, ShopeePay)
         </p>
     </section>
@@ -776,7 +998,7 @@
     <!-- Contact Section -->
     <section class="contact-section">
         <h2 class="section-title">Hubungi Kami</h2>
-        <p style="text-align: center; margin-bottom: 2rem; max-width: 800px; margin-left: auto; margin-right: auto;">
+        <p style="text-align: center; margin-bottom: 2rem; max-width: 800px; margin-left: auto; margin-right: auto; font-size: 1.1rem;">
             Ingin memiliki bisnis permainan kredit? Silakan hubungi kami di bawah ini sesuai dengan kebutuhan Kamu!<br>
             Mengalami masalah dengan waktu transaksi?
         </p>
@@ -890,10 +1112,10 @@
             
             <div class="social-login">
                 <button class="social-btn google-btn">
-                    <i class="fab fa-google"></i> Google
+                    <i class="fab fa-google"></i> Daftar dengan Google
                 </button>
                 <button class="social-btn facebook-btn">
-                    <i class="fab fa-facebook-f"></i> Facebook
+                    <i class="fab fa-facebook-f"></i> Daftar dengan Facebook
                 </button>
             </div>
             
@@ -949,7 +1171,7 @@
                     <li><i class="fab fa-whatsapp"></i> 62895402128077</li>
                 </ul>
                 <p style="margin-top: 1rem;">
-                    <a href="#" class="whatsapp-btn" style="margin-top: 0; font-size: 0.9rem; padding: 0.6rem 1rem;">
+                    <a href="https://wa.me/62895402128077" class="whatsapp-btn" style="margin-top: 0; font-size: 0.9rem; padding: 0.8rem 1.2rem;">
                         <i class="fab fa-whatsapp"></i> WhatsApp Kami
                     </a>
                 </p>
@@ -957,7 +1179,7 @@
         </div>
         
         <div class="copyright">
-            <p>&copy; 2023 GarzVoucher. Hak Cipta Dilindungi.</p>
+            <p>&copy; 2025 GarzVoucher. Hak Cipta Dilindungi.</p>
             <p>Kalo Ada kendala Hubungi Kami</p>
         </div>
     </footer>
@@ -997,6 +1219,107 @@
         </div>
     </div>
     
+    <!-- Purchase Modal -->
+    <div class="modal" id="purchaseModal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2 style="text-align: center; margin-bottom: 1.5rem; color: var(--accent-blue);">Proses Pembelian Diamond</h2>
+            
+            <div class="purchase-container">
+                <!-- Step 1: Pilih Diamond -->
+                <div class="purchase-step">
+                    <h3>1. Pilih Diamond yang Kamu Suka</h3>
+                    <div class="purchase-item">
+                        <i class="fas fa-gem"></i>
+                        <div>
+                            <h4>120 Diamonds</h4>
+                            <div class="diamond-original">Rp 17.789</div>
+                            <div class="diamond-price">Rp 15.120</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Step 2: Masukkan Data Akun -->
+                <div class="purchase-step">
+                    <h3>2. Masukkan Data Akun</h3>
+                    <div class="form-group">
+                        <label for="gameId">ID Game</label>
+                        <input type="text" class="form-control" id="gameId" placeholder="Masukkan ID Game Anda">
+                    </div>
+                    <div class="form-group">
+                        <label for="serverId">Server ID</label>
+                        <input type="text" class="form-control" id="serverId" placeholder="Masukkan Server ID">
+                    </div>
+                </div>
+                
+                <!-- Step 3: Jumlah Pembelian -->
+                <div class="purchase-step">
+                    <h3>3. Masukkan Jumlah Pembelian</h3>
+                    <div class="quantity-control">
+                        <button class="quantity-btn">-</button>
+                        <input type="text" class="quantity-input" value="1">
+                        <button class="quantity-btn">+</button>
+                    </div>
+                </div>
+                
+                <!-- Step 4: Pilih Pembayaran -->
+                <div class="purchase-step">
+                    <h3>4. Pilih Pembayaran</h3>
+                    <div class="payment-options">
+                        <div class="payment-option active">
+                            <i class="fab fa-google-pay"></i>
+                            <div>Gopay</div>
+                        </div>
+                        <div class="payment-option">
+                            <i class="fab fa-cc-visa"></i>
+                            <div>OVO</div>
+                        </div>
+                        <div class="payment-option">
+                            <i class="fas fa-wallet"></i>
+                            <div>Dana</div>
+                        </div>
+                        <div class="payment-option">
+                            <i class="fab fa-cc-mastercard"></i>
+                            <div>ShopeePay</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Step 5: Kode Promo -->
+                <div class="purchase-step">
+                    <h3>5. Kode Promo</h3>
+                    <div class="promo-container">
+                        <input type="text" class="promo-input" placeholder="Ketik Kode Promo Kamu">
+                        <button class="apply-btn">Gunakan</button>
+                    </div>
+                </div>
+                
+                <!-- Step 6: Detail Kontak -->
+                <div class="purchase-step">
+                    <h3>6. Detail Kontak</h3>
+                    <div class="form-group">
+                        <label for="contactEmail">Email</label>
+                        <input type="email" class="form-control" id="contactEmail" placeholder="Masukkan email Anda">
+                    </div>
+                    <div class="form-group">
+                        <label for="contactWhatsApp">Nomor WhatsApp</label>
+                        <input type="tel" class="form-control" id="contactWhatsApp" placeholder="Contoh: 628123456789">
+                    </div>
+                    <p><em>Nomor ini akan dihubungi jika terjadi masalah</em></p>
+                    <p><em>Bukti transaksi akan kami kirim ke email/wa yang kamu isi diatas.</em></p>
+                </div>
+                
+                <button class="send-btn">
+                    <i class="fas fa-shopping-cart"></i> Konfirmasi Pembelian
+                </button>
+                
+                <a href="https://wa.me/62895402128077" class="help-link">
+                    Butuh bantuan? Kamu bisa hubungi admin disini
+                </a>
+            </div>
+        </div>
+    </div>
+    
     <script>
         // Toggle mobile menu
         document.querySelector('.menu-toggle').addEventListener('click', function() {
@@ -1006,46 +1329,47 @@
         // Modal functionality
         const loginBtn = document.getElementById('loginBtn');
         const loginModal = document.getElementById('loginModal');
-        const closeModal = document.querySelector('.close-modal');
+        const purchaseModal = document.getElementById('purchaseModal');
+        const closeModals = document.querySelectorAll('.close-modal');
         const loginLink = document.getElementById('loginLink');
         const registerLink = document.getElementById('registerLink');
+        const diamondItems = document.querySelectorAll('.diamond-item');
         
         function openLoginModal() {
             loginModal.style.display = 'flex';
         }
         
-        function closeLoginModal() {
+        function openPurchaseModal() {
+            purchaseModal.style.display = 'flex';
+        }
+        
+        function closeAllModals() {
             loginModal.style.display = 'none';
+            purchaseModal.style.display = 'none';
         }
         
         loginBtn.addEventListener('click', openLoginModal);
         loginLink.addEventListener('click', openLoginModal);
-        closeModal.addEventListener('click', closeLoginModal);
+        
+        closeModals.forEach(close => {
+            close.addEventListener('click', closeAllModals);
+        });
+        
         registerLink.addEventListener('click', function(e) {
             e.preventDefault();
-            closeLoginModal();
+            closeAllModals();
             document.querySelector('.register-section').scrollIntoView({ behavior: 'smooth' });
         });
         
         // Close modal when clicking outside
         window.addEventListener('click', function(e) {
-            if (e.target === loginModal) {
-                closeLoginModal();
+            if (e.target === loginModal || e.target === purchaseModal) {
+                closeAllModals();
             }
         });
         
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
-        
         // Diamond item selection
-        document.querySelectorAll('.diamond-item').forEach(item => {
+        diamondItems.forEach(item => {
             item.addEventListener('click', function() {
                 // Remove active class from all items
                 document.querySelectorAll('.diamond-item').forEach(i => {
@@ -1055,15 +1379,39 @@
                 // Add active class to clicked item
                 this.classList.add('active');
                 
-                // Show payment modal or redirect to payment page
-                setTimeout(() => {
-                    alert('Pembelian berhasil ditambahkan ke keranjang! Silakan selesaikan pembayaran.');
-                }, 300);
+                // Open purchase modal
+                openPurchaseModal();
+            });
+        });
+        
+        // Quantity control
+        const minusBtn = document.querySelector('.quantity-control .quantity-btn:first-child');
+        const plusBtn = document.querySelector('.quantity-control .quantity-btn:last-child');
+        const quantityInput = document.querySelector('.quantity-input');
+        
+        minusBtn.addEventListener('click', function() {
+            let value = parseInt(quantityInput.value);
+            if (value > 1) {
+                quantityInput.value = value - 1;
+            }
+        });
+        
+        plusBtn.addEventListener('click', function() {
+            let value = parseInt(quantityInput.value);
+            quantityInput.value = value + 1;
+        });
+        
+        // Payment option selection
+        const paymentOptions = document.querySelectorAll('.payment-option');
+        paymentOptions.forEach(option => {
+            option.addEventListener('click', function() {
+                paymentOptions.forEach(opt => opt.classList.remove('active'));
+                this.classList.add('active');
             });
         });
         
         // Form submission
-        document.querySelector('.send-btn').addEventListener('click', function() {
+        document.querySelector('.contact-form .send-btn').addEventListener('click', function() {
             alert('Pesan Anda telah terkirim! Tim kami akan segera menghubungi Anda.');
         });
         
@@ -1076,6 +1424,16 @@
         document.getElementById('checkTransactionBtn').addEventListener('click', function() {
             alert('Silakan login terlebih dahulu untuk melihat riwayat transaksi Anda.');
             openLoginModal();
+        });
+        
+        // Apply promo code
+        document.querySelector('.apply-btn').addEventListener('click', function() {
+            const promoCode = document.querySelector('.promo-input').value;
+            if (promoCode) {
+                alert(`Kode promo "${promoCode}" berhasil diterapkan!`);
+            } else {
+                alert('Silakan masukkan kode promo terlebih dahulu');
+            }
         });
     </script>
 </body>
