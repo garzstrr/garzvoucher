@@ -464,7 +464,7 @@
             margin-bottom: 1.5rem;
         }
         
-        .promo-timer {
+        .voucher-code {
             background: rgba(0, 0, 0, 0.2);
             border-radius: 50px;
             padding: 0.8rem;
@@ -477,13 +477,14 @@
             font-weight: bold;
         }
         
-        .timer-item {
+        .voucher-item {
             background: white;
             color: var(--primary-blue);
             padding: 0.5rem 1rem;
             border-radius: 8px;
             font-weight: 700;
-            min-width: 60px;
+            min-width: 200px;
+            font-family: monospace;
         }
         
         .contact-section {
@@ -731,6 +732,61 @@
             gap: 1rem;
         }
         
+        .payment-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .payment-modal-content {
+            background: white;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 500px;
+            padding: 2.5rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+        
+        .payment-method-selection {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        
+        .payment-option {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 1rem;
+            border: 1px solid var(--gray);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .payment-option:hover {
+            background-color: var(--light-blue);
+            border-color: var(--primary-blue);
+        }
+        
+        .payment-option.active {
+            border-color: var(--primary-blue);
+            background-color: var(--light-blue);
+        }
+        
+        .payment-option i {
+            font-size: 2rem;
+        }
+        
         @media (max-width: 768px) {
             .header-content {
                 flex-direction: column;
@@ -794,7 +850,6 @@
                             <li><a href="#" class="active">Beranda</a></li>
                             <li><a href="#diamonds">Diamonds</a></li>
                             <li><a href="#games">Games</a></li>
-                            <li><a href="#transactions">Transaksi</a></li>
                             <li><a href="#promo">Promo</a></li>
                             <li><a href="#contact">Kontak</a></li>
                         </ul>
@@ -1003,18 +1058,15 @@
         <div class="promo-section">
             <div class="promo-content">
                 <i class="fas fa-tag"></i>
-                <h3>Promo Spesial Akhir Bulan!</h3>
-                <p>Dapatkan diskon tambahan 15% untuk semua pembelian diamond di atas 100💎</p>
-                <p>Promo berlaku hingga:</p>
+                <h3>Voucher Spesial GarzVoucher!</h3>
+                <p>Gunakan kode voucher di bawah untuk mendapatkan diskon 15% pada pembelian pertama Anda</p>
                 
-                <div class="promo-timer">
-                    <div class="timer-item">31</div>
-                    <div>Juli</div>
-                    <div class="timer-item">2023</div>
+                <div class="voucher-code">
+                    <div class="voucher-item">GARZMARKET</div>
                 </div>
                 
                 <button class="btn btn-primary">
-                    Klaim Promo Sekarang <i class="fas fa-gift"></i>
+                    Klaim Voucher Sekarang <i class="fas fa-gift"></i>
                 </button>
             </div>
         </div>
@@ -1131,6 +1183,55 @@
         </div>
     </div>
 
+    <!-- Payment Modal -->
+    <div id="paymentModal" class="payment-modal">
+        <div class="payment-modal-content">
+            <div class="modal-header">
+                <h2>Metode Pembayaran</h2>
+                <span class="close-modal">&times;</span>
+            </div>
+            
+            <div class="payment-method-selection">
+                <div class="payment-option active">
+                    <i class="fab fa-google-pay"></i>
+                    <div>
+                        <h3>Gopay</h3>
+                        <p>Pembayaran Instan</p>
+                    </div>
+                </div>
+                
+                <div class="payment-option">
+                    <i class="fab fa-whatsapp"></i>
+                    <div>
+                        <h3>Dana</h3>
+                        <p>Pembayaran Instan</p>
+                    </div>
+                </div>
+                
+                <div class="payment-option">
+                    <i class="fas fa-credit-card"></i>
+                    <div>
+                        <h3>OVO</h3>
+                        <p>Pembayaran Instan</p>
+                    </div>
+                </div>
+                
+                <div class="payment-option">
+                    <i class="fab fa-cc-visa"></i>
+                    <div>
+                        <h3>ShopeePay</h3>
+                        <p>Pembayaran Instan</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="modal-footer">
+                <button class="btn btn-outline">Batal</button>
+                <button class="btn btn-primary">Lanjutkan Pembayaran</button>
+            </div>
+        </div>
+    </div>
+
     <script>
         // Data paket diamond
         const diamondPackages = [
@@ -1161,7 +1262,7 @@
                 <div class="diamond-amount">${pkg.amount}</div>
                 <div class="diamond-price">${pkg.price}</div>
                 <div class="diamond-original-price">${pkg.original}</div>
-                <button class="btn btn-primary">Beli Sekarang</button>
+                <button class="btn btn-primary beli-btn">Beli Sekarang</button>
             `;
             diamondsGrid.appendChild(diamondCard);
         });
@@ -1169,6 +1270,7 @@
         // Modal functionality
         const loginModal = document.getElementById('loginModal');
         const registerModal = document.getElementById('registerModal');
+        const paymentModal = document.getElementById('paymentModal');
         const loginBtn = document.getElementById('loginBtn');
         const registerBtn = document.getElementById('registerBtn');
         const showRegister = document.getElementById('showRegister');
@@ -1177,6 +1279,8 @@
         const mobileMenu = document.getElementById('mobileMenu');
         const mobileLogin = document.getElementById('mobileLogin');
         const mobileRegister = document.getElementById('mobileRegister');
+        const beliButtons = document.querySelectorAll('.beli-btn');
+        const paymentOptions = document.querySelectorAll('.payment-option');
         
         // Buka modal login
         loginBtn.addEventListener('click', () => {
@@ -1200,6 +1304,7 @@
             button.addEventListener('click', () => {
                 loginModal.style.display = 'none';
                 registerModal.style.display = 'none';
+                paymentModal.style.display = 'none';
             });
         });
         
@@ -1207,6 +1312,7 @@
         window.addEventListener('click', (e) => {
             if (e.target === loginModal) loginModal.style.display = 'none';
             if (e.target === registerModal) registerModal.style.display = 'none';
+            if (e.target === paymentModal) paymentModal.style.display = 'none';
         });
         
         // Toggle hamburger menu
@@ -1234,6 +1340,21 @@
             method.addEventListener('click', () => {
                 paymentMethods.forEach(m => m.classList.remove('active'));
                 method.classList.add('active');
+            });
+        });
+        
+        // Pilih metode pembayaran di modal
+        paymentOptions.forEach(option => {
+            option.addEventListener('click', () => {
+                paymentOptions.forEach(o => o.classList.remove('active'));
+                option.classList.add('active');
+            });
+        });
+        
+        // Tombol beli diamond
+        beliButtons.forEach(btn => {
+            btn.addEventListener('click', function() {
+                paymentModal.style.display = 'flex';
             });
         });
         
@@ -1304,13 +1425,6 @@
         
         // Jalankan animasi pertama kali
         setTimeout(animateOnScroll, 300);
-        
-        // Tombol beli diamond
-        document.querySelectorAll('.diamond-card .btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                alert('Pilih metode pembayaran dan konfirmasi pembelian di bagian Metode Pembayaran');
-            });
-        });
     </script>
 </body>
 </html>
