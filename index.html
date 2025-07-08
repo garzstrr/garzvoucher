@@ -345,6 +345,7 @@
             transition: var(--transition);
             cursor: pointer;
             border: 1px solid rgba(0, 168, 255, 0.2);
+            position: relative;
         }
 
         .diamond-card:hover {
@@ -375,6 +376,19 @@
             font-size: 0.9rem;
             opacity: 0.8;
             color: #b2bec3;
+        }
+
+        .game-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: var(--primary);
+            color: var(--darker);
+            font-size: 0.7rem;
+            font-weight: bold;
+            padding: 3px 8px;
+            border-radius: 15px;
+            text-transform: uppercase;
         }
 
         /* Form Section */
@@ -848,7 +862,7 @@
 
         @media (max-width: 576px) {
             .diamond-grid {
-                grid-template-columns: repeat(2, 1fr);
+                grid-template-columns: 1fr;
             }
             
             .footer-grid {
@@ -978,67 +992,79 @@
             </div>
         </div>
         
-        <!-- Diamond Section -->
+        <!-- Diamond Section - Semua Game -->
         <div class="section-title">
             <h2>Pilih Diamond</h2>
         </div>
         <div class="diamond-grid">
             <div class="diamond-card">
+                <span class="game-badge">ML</span>
                 <div class="diamond-icon">💎</div>
                 <div class="diamond-amount">12 Diamonds</div>
                 <div class="diamond-price">Dari: Rp1.908</div>
             </div>
             <div class="diamond-card">
+                <span class="game-badge">FF</span>
                 <div class="diamond-icon">💎</div>
                 <div class="diamond-amount">55 Diamonds</div>
                 <div class="diamond-price">Dari: Rp12.000</div>
             </div>
             <div class="diamond-card">
+                <span class="game-badge">FF MAX</span>
                 <div class="diamond-icon">💎</div>
                 <div class="diamond-amount">70 Diamonds</div>
                 <div class="diamond-price">Dari: Rp12.917</div>
             </div>
             <div class="diamond-card">
+                <span class="game-badge">ML</span>
                 <div class="diamond-icon">💎</div>
                 <div class="diamond-amount">80 Diamonds</div>
                 <div class="diamond-price">Rp13.000</div>
             </div>
             <div class="diamond-card">
+                <span class="game-badge">FF</span>
                 <div class="diamond-icon">💎</div>
                 <div class="diamond-amount">100 Diamonds</div>
                 <div class="diamond-price">Rp15.917</div>
             </div>
             <div class="diamond-card">
+                <span class="game-badge">FF MAX</span>
                 <div class="diamond-icon">💎</div>
                 <div class="diamond-amount">120 Diamonds</div>
                 <div class="diamond-price">Dari: Rp17.789</div>
             </div>
             <div class="diamond-card">
+                <span class="game-badge">ML</span>
                 <div class="diamond-icon">💎</div>
                 <div class="diamond-amount">130 Diamonds</div>
                 <div class="diamond-price">Dari: Rp19.662</div>
             </div>
             <div class="diamond-card">
+                <span class="game-badge">FF</span>
                 <div class="diamond-icon">💎</div>
                 <div class="diamond-amount">140 Diamonds</div>
                 <div class="diamond-price">Dari: Rp20.483</div>
             </div>
             <div class="diamond-card">
+                <span class="game-badge">FF MAX</span>
                 <div class="diamond-icon">💎</div>
                 <div class="diamond-amount">150 Diamonds</div>
                 <div class="diamond-price">Dari: Rp21.979</div>
             </div>
             <div class="diamond-card">
+                <span class="game-badge">ML</span>
                 <div class="diamond-icon">💎</div>
                 <div class="diamond-amount">190 Diamonds</div>
                 <div class="diamond-price">Dari: Rp24.382</div>
             </div>
             <div class="diamond-card">
+                <span class="game-badge">FF</span>
                 <div class="diamond-icon">💎</div>
                 <div class="diamond-amount">270 Diamonds</div>
                 <div class="diamond-price">Dari: Rp31.232</div>
             </div>
             <div class="diamond-card">
+                <span class="game-badge">FF MAX</span>
                 <div class="diamond-icon">💎</div>
                 <div class="diamond-amount">1100 Diamonds</div>
                 <div class="diamond-price">Dari: Rp52.232</div>
@@ -1073,11 +1099,6 @@
                 <div class="diamond-amount">50K Roblox</div>
                 <div class="diamond-price">Dari Rp. 0</div>
             </div>
-            <div class="diamond-card">
-                <div class="diamond-icon">🎁</div>
-                <div class="diamond-amount">65K Roblox</div>
-                <div class="diamond-price">Dari Rp. 0</div>
-            </div>
         </div>
         
         <!-- Top Up Form -->
@@ -1109,7 +1130,6 @@
                             <option>Roblox Gift Card 200K - Rp200.000</option>
                             <option>Roblox Gift Card 500K - Rp500.000</option>
                             <option>Roblox Gift Card 50K - Rp0</option>
-                            <option>Roblox Gift Card 65K - Rp0</option>
                         </select>
                     </div>
                     
