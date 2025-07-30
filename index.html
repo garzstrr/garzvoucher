@@ -1,1337 +1,976 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GarzVoucher - Topup Game Termurah & Terpercaya</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        :root {
-            --primary: #1a73e8;
-            --primary-dark: #0d47a1;
-            --secondary: #29b6f6;
-            --light: #f5f9ff;
-            --dark: #0a1e3c;
-            --success: #4caf50;
-            --warning: #ff9800;
-            --danger: #f44336;
-            --gray: #e0e0e0;
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        
-        body {
-            background-color: #f0f7ff;
-            color: #333;
-            line-height: 1.6;
-        }
-        
-        /* Header Styles */
-        header {
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-            color: white;
-            padding: 15px 5%;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .logo img {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: white;
-            padding: 5px;
-        }
-        
-        .logo h1 {
-            font-size: 1.8rem;
-            font-weight: 700;
-        }
-        
-        .nav-links {
-            display: flex;
-            gap: 25px;
-            align-items: center;
-        }
-        
-        .nav-links a {
-            color: white;
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s;
-            padding: 8px 15px;
-            border-radius: 5px;
-        }
-        
-        .nav-links a:hover {
-            background: rgba(255, 255, 255, 0.2);
-        }
-        
-        .menu-toggle {
-            display: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-        
-        .user-actions {
-            display: flex;
-            gap: 15px;
-            align-items: center;
-        }
-        
-        .btn {
-            padding: 10px 20px;
-            border-radius: 5px;
-            border: none;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        
-        .btn-login {
-            background: white;
-            color: var(--primary);
-        }
-        
-        .btn-register {
-            background: var(--secondary);
-            color: white;
-        }
-        
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
-        
-        /* Hero Section */
-        .hero {
-            background: url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80') no-repeat center center/cover;
-            height: 500px;
-            display: flex;
-            align-items: center;
-            position: relative;
-        }
-        
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(26, 115, 232, 0.8);
-        }
-        
-        .hero-content {
-            position: relative;
-            z-index: 2;
-            color: white;
-            padding: 0 5%;
-            max-width: 800px;
-        }
-        
-        .hero-content h2 {
-            font-size: 3rem;
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-        }
-        
-        .hero-content p {
-            font-size: 1.2rem;
-            margin-bottom: 30px;
-            max-width: 600px;
-        }
-        
-        .btn-hero {
-            background: var(--secondary);
-            color: white;
-            font-size: 1.1rem;
-            padding: 12px 30px;
-            border-radius: 30px;
-        }
-        
-        /* Games Section */
-        .games-section {
-            padding: 70px 5%;
-            background: white;
-        }
-        
-        .section-title {
-            text-align: center;
-            margin-bottom: 50px;
-            color: var(--dark);
-        }
-        
-        .section-title h2 {
-            font-size: 2.5rem;
-            margin-bottom: 15px;
-        }
-        
-        .section-title p {
-            color: #666;
-            max-width: 700px;
-            margin: 0 auto;
-        }
-        
-        .games-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 25px;
-        }
-        
-        .game-card {
-            background: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s;
-            border: 2px solid var(--gray);
-        }
-        
-        .game-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
-            border-color: var(--primary);
-        }
-        
-        .game-img {
-            height: 200px;
-            background: var(--light);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 5rem;
-            color: var(--primary);
-        }
-        
-        .game-content {
-            padding: 20px;
-            text-align: center;
-        }
-        
-        .game-content h3 {
-            font-size: 1.5rem;
-            margin-bottom: 15px;
-            color: var(--dark);
-        }
-        
-        .game-content p {
-            color: #666;
-            margin-bottom: 20px;
-            font-size: 0.95rem;
-        }
-        
-        .btn-game {
-            background: var(--primary);
-            color: white;
-            width: 100%;
-            padding: 12px;
-            border-radius: 5px;
-        }
-        
-        /* Topup Process */
-        .topup-process {
-            padding: 70px 5%;
-            background: var(--light);
-        }
-        
-        .process-steps {
-            display: flex;
-            justify-content: space-between;
-            max-width: 1000px;
-            margin: 0 auto;
-            position: relative;
-        }
-        
-        .process-steps::before {
-            content: '';
-            position: absolute;
-            top: 40px;
-            left: 10%;
-            width: 80%;
-            height: 3px;
-            background: var(--primary);
-            z-index: 1;
-        }
-        
-        .step {
-            text-align: center;
-            position: relative;
-            z-index: 2;
-            flex: 1;
-        }
-        
-        .step-icon {
-            width: 80px;
-            height: 80px;
-            background: white;
-            border: 3px solid var(--primary);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 20px;
-            font-size: 1.8rem;
-            color: var(--primary);
-        }
-        
-        .step h3 {
-            margin-bottom: 10px;
-            color: var(--dark);
-        }
-        
-        .step p {
-            color: #666;
-            font-size: 0.95rem;
-        }
-        
-        /* Reviews Section */
-        .reviews {
-            padding: 70px 5%;
-            background: white;
-        }
-        
-        .reviews-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 30px;
-            margin-top: 40px;
-        }
-        
-        .review-card {
-            background: var(--light);
-            border-radius: 10px;
-            padding: 25px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            border: 1px solid var(--gray);
-        }
-        
-        .review-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-        
-        .review-avatar {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: var(--primary);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.2rem;
-            margin-right: 15px;
-        }
-        
-        .review-name {
-            font-weight: 600;
-            color: var(--dark);
-        }
-        
-        .review-rating {
-            color: #ff9800;
-            margin-top: 5px;
-        }
-        
-        .review-content {
-            color: #555;
-            line-height: 1.7;
-        }
-        
-        /* Contact Section */
-        .contact {
-            padding: 70px 5%;
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-            color: white;
-            text-align: center;
-        }
-        
-        .contact h2 {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-        }
-        
-        .contact p {
-            max-width: 700px;
-            margin: 0 auto 30px;
-            font-size: 1.1rem;
-        }
-        
-        .contact-info {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 30px;
-            border-radius: 10px;
-            display: inline-block;
-            margin-top: 20px;
-            text-align: center;
-        }
-        
-        .contact-info p {
-            margin: 10px 0;
-            font-size: 1.1rem;
-        }
-        
-        .contact-info i {
-            margin-right: 10px;
-            font-size: 1.2rem;
-        }
-        
-        /* Footer */
-        footer {
-            background: var(--dark);
-            color: white;
-            padding: 50px 5% 20px;
-        }
-        
-        .footer-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 30px;
-            margin-bottom: 40px;
-        }
-        
-        .footer-col h3 {
-            font-size: 1.4rem;
-            margin-bottom: 20px;
-            position: relative;
-            padding-bottom: 10px;
-        }
-        
-        .footer-col h3::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 50px;
-            height: 2px;
-            background: var(--secondary);
-        }
-        
-        .footer-links {
-            list-style: none;
-        }
-        
-        .footer-links li {
-            margin-bottom: 12px;
-        }
-        
-        .footer-links a {
-            color: #aaa;
-            text-decoration: none;
-            transition: all 0.3s;
-        }
-        
-        .footer-links a:hover {
-            color: var(--secondary);
-            padding-left: 5px;
-        }
-        
-        .footer-bottom {
-            text-align: center;
-            padding-top: 20px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            font-size: 0.9rem;
-            color: #aaa;
-        }
-        
-        /* Modal Styles */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            z-index: 1000;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .modal-content {
-            background: white;
-            border-radius: 10px;
-            width: 90%;
-            max-width: 500px;
-            max-height: 90vh;
-            overflow-y: auto;
-            position: relative;
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
-        }
-        
-        .close-modal {
-            position: absolute;
-            top: 15px;
-            right: 20px;
-            font-size: 1.8rem;
-            color: #666;
-            cursor: pointer;
-            background: none;
-            border: none;
-        }
-        
-        .modal-header {
-            padding: 20px;
-            background: var(--primary);
-            color: white;
-            border-radius: 10px 10px 0 0;
-        }
-        
-        .modal-header h2 {
-            font-size: 1.8rem;
-        }
-        
-        .modal-body {
-            padding: 25px;
-        }
-        
-        .form-group {
-            margin-bottom: 20px;
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 500;
-            color: #555;
-        }
-        
-        .form-control {
-            width: 100%;
-            padding: 12px 15px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-size: 1rem;
-            transition: all 0.3s;
-        }
-        
-        .form-control:focus {
-            border-color: var(--primary);
-            outline: none;
-            box-shadow: 0 0 0 3px rgba(26, 115, 232, 0.2);
-        }
-        
-        .btn-submit {
-            background: var(--primary);
-            color: white;
-            width: 100%;
-            padding: 14px;
-            font-size: 1.1rem;
-            border-radius: 5px;
-            margin-top: 10px;
-        }
-        
-        .forgot-password {
-            text-align: center;
-            margin-top: 15px;
-        }
-        
-        .forgot-password a {
-            color: var(--primary);
-            text-decoration: none;
-        }
-        
-        /* Topup Form */
-        .diamond-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
-            margin: 20px 0;
-        }
-        
-        .diamond-option {
-            border: 2px solid #ddd;
-            border-radius: 8px;
-            padding: 15px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        
-        .diamond-option:hover, .diamond-option.selected {
-            border-color: var(--primary);
-            background: rgba(26, 115, 232, 0.05);
-        }
-        
-        .diamond-option h4 {
-            color: var(--primary);
-            margin-bottom: 5px;
-        }
-        
-        .quantity-control {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 20px 0;
-        }
-        
-        .quantity-btn {
-            width: 40px;
-            height: 40px;
-            background: var(--primary);
-            color: white;
-            border: none;
-            border-radius: 5px;
-            font-size: 1.2rem;
-            cursor: pointer;
-        }
-        
-        .quantity-input {
-            width: 70px;
-            height: 40px;
-            margin: 0 10px;
-            text-align: center;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-size: 1.1rem;
-        }
-        
-        .payment-options {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin: 20px 0;
-        }
-        
-        .payment-option {
-            flex: 1;
-            min-width: 100px;
-            border: 2px solid #ddd;
-            border-radius: 8px;
-            padding: 12px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        
-        .payment-option:hover, .payment-option.selected {
-            border-color: var(--primary);
-            background: rgba(26, 115, 232, 0.05);
-        }
-        
-        .payment-option i {
-            font-size: 2rem;
-            margin-bottom: 10px;
-            color: var(--primary);
-        }
-        
-        /* Responsive */
-        @media (max-width: 992px) {
-            .games-grid, .reviews-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .footer-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-        
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-            
-            .menu-toggle {
-                display: block;
-            }
-            
-            .process-steps {
-                flex-direction: column;
-                align-items: center;
-                gap: 40px;
-            }
-            
-            .process-steps::before {
-                display: none;
-            }
-            
-            .diamond-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-        
-        @media (max-width: 576px) {
-            .games-grid, .reviews-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .footer-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .hero-content h2 {
-                font-size: 2.2rem;
-            }
-        }
-    </style>
-</head>
-<body>
-    <!-- Header -->
-    <header>
-        <div class="logo">
-            <i class="fas fa-gamepad"></i>
-            <h1>GarzVoucher</h1>
-        </div>
-        
-        <div class="nav-links">
-            <a href="#"><i class="fas fa-home"></i> Beranda</a>
-            <a href="#"><i class="fas fa-fire"></i> Voucher</a>
-            <a href="#"><i class="fas fa-headset"></i> Dukungan</a>
-            <a href="#"><i class="fas fa-file-alt"></i> Syarat & Ketentuan</a>
-        </div>
-        
-        <div class="user-actions">
-            <button class="btn btn-login" id="loginBtn"><i class="fas fa-sign-in-alt"></i> Masuk</button>
-            <button class="btn btn-register" id="registerBtn"><i class="fas fa-user-plus"></i> Daftar</button>
-            <div class="menu-toggle" id="menuToggle">
-                <i class="fas fa-bars"></i>
-            </div>
-        </div>
-    </header>
-    
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-content">
-            <h2>Top Up Game Termurah & Tercepat</h2>
-            <p>Isi diamond, voucher, dan item game favoritmu dengan harga terbaik dan proses instan. Garansi 100% aman dan legal!</p>
-            <button class="btn btn-hero">Top Up Sekarang <i class="fas fa-arrow-right"></i></button>
-        </div>
-    </section>
-    
-    <!-- Games Section -->
-    <section class="games-section">
-        <div class="section-title">
-            <h2>Game Populer</h2>
-            <p>Pilih game favoritmu dan nikmati pengalaman top up yang mudah dan cepat</p>
-        </div>
-        
-        <div class="games-grid">
-            <div class="game-card">
-                <div class="game-img">
-                    <i class="fab fa-android"></i>
-                </div>
-                <div class="game-content">
-                    <h3>Mobile Legends</h3>
-                    <p>Top up Diamond Mobile Legends dengan harga termurah dan proses instan</p>
-                    <button class="btn btn-game">Beli Sekarang</button>
-                </div>
-            </div>
-            
-            <div class="game-card">
-                <div class="game-img">
-                    <i class="fas fa-fire"></i>
-                </div>
-                <div class="game-content">
-                    <h3>Free Fire</h3>
-                    <p>Isi Diamond Free Fire dengan harga spesial dan garansi keamanan</p>
-                    <button class="btn btn-game">Beli Sekarang</button>
-                </div>
-            </div>
-            
-            <div class="game-card">
-                <div class="game-img">
-                    <i class="fas fa-fire-extinguisher"></i>
-                </div>
-                <div class="game-content">
-                    <h3>Free Fire MAX</h3>
-                    <p>Top up Diamond Free Fire MAX dengan proses instan tanpa ribet</p>
-                    <button class="btn btn-game">Beli Sekarang</button>
-                </div>
-            </div>
-            
-            <div class="game-card">
-                <div class="game-img">
-                    <i class="fas fa-robot"></i>
-                </div>
-                <div class="game-content">
-                    <h3>Roblox</h3>
-                    <p>Isi Robux untuk Roblox dengan harga terbaik se-Indonesia</p>
-                    <button class="btn btn-game">Beli Sekarang</button>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Topup Process -->
-    <section class="topup-process">
-        <div class="section-title">
-            <h2>Cara Top Up Mudah</h2>
-            <p>Hanya dalam 4 langkah mudah, diamond atau voucher game kamu akan terisi</p>
-        </div>
-        
-        <div class="process-steps">
-            <div class="step">
-                <div class="step-icon">
-                    <i class="fas fa-gamepad"></i>
-                </div>
-                <h3>Pilih Game</h3>
-                <p>Pilih game dan server yang kamu inginkan</p>
-            </div>
-            
-            <div class="step">
-                <div class="step-icon">
-                    <i class="fas fa-money-bill-wave"></i>
-                </div>
-                <h3>Pilih Nominal</h3>
-                <p>Pilih jumlah diamond atau voucher yang diinginkan</p>
-            </div>
-            
-            <div class="step">
-                <div class="step-icon">
-                    <i class="fas fa-user"></i>
-                </div>
-                <h3>Masukkan ID</h3>
-                <p>Masukkan ID game dan karakter kamu</p>
-            </div>
-            
-            <div class="step">
-                <div class="step-icon">
-                    <i class="fas fa-credit-card"></i>
-                </div>
-                <h3>Pembayaran</h3>
-                <p>Pilih metode pembayaran dan selesaikan transaksi</p>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Reviews Section -->
-    <section class="reviews">
-        <div class="section-title">
-            <h2>ULASAN TOP UP</h2>
-            <p>Terimakasih kepada semua pelanggan yang memberikan ulasan dan penilaian kepada kami</p>
-        </div>
-        
-        <div class="reviews-grid">
-            <div class="review-card">
-                <div class="review-header">
-                    <div class="review-avatar">
-                        <i class="fas fa-user"></i>
-                    </div>
-                    <div>
-                        <div class="review-name">Budi Santoso</div>
-                        <div class="review-rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
-                    </div>
-                </div>
-                <div class="review-content">
-                    Proses top up di GarzVoucher sangat cepat! Hanya 2 menit setelah pembayaran, diamond langsung masuk ke akun Mobile Legends saya. Harga juga lebih murah dibanding tempat lain. Recommended banget!
-                </div>
-            </div>
-            
-            <div class="review-card">
-                <div class="review-header">
-                    <div class="review-avatar">
-                        <i class="fas fa-user"></i>
-                    </div>
-                    <div>
-                        <div class="review-name">Siti Rahayu</div>
-                        <div class="review-rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star-half-alt"></i>
-                        </div>
-                    </div>
-                </div>
-                <div class="review-content">
-                    Awalnya ragu karena baru pertama top up online, tapi ternyata aman dan terpercaya. CS-nya juga ramah dan responsif ketika saya bertanya tentang metode pembayaran. Pokoknya puas deh!
-                </div>
-            </div>
-            
-            <div class="review-card">
-                <div class="review-header">
-                    <div class="review-avatar">
-                        <i class="fas fa-user"></i>
-                    </div>
-                    <div>
-                        <div class="review-name">Ahmad Fauzi</div>
-                        <div class="review-rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
-                    </div>
-                </div>
-                <div class="review-content">
-                    Baru saja top up Free Fire MAX 720 diamond. Prosesnya mudah dan cepat. Harga lebih murah 10% dari toko lain. Bakal jadi langganan nih. Terima kasih GarzVoucher!
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Contact Section -->
-    <section class="contact">
-        <h2>Butuh Bantuan?</h2>
-        <p>Mengalami masalah dengan waktu transaksi? Ingin memiliki bisnis permainan kredit? Silakan hubungi kami di bawah ini sesuai dengan kebutuhan Kamu!</p>
-        
-        <div class="contact-info">
-            <p><i class="fas fa-map-marker-alt"></i> Jakarta, Indonesia</p>
-            <p><i class="fas fa-envelope"></i> garzvoucher@gmail.com</p>
-            <p><i class="fab fa-whatsapp"></i> +62 895-4021-28077</p>
-        </div>
-        
-        <p style="margin-top: 30px; font-size: 1.2rem; font-weight: 500;">
-            Top up game & voucher terlaris, murah, aman legal 100% buka 24 jam dengan payment terlengkap se-indonesia
-        </p>
-    </section>
-    
-    <!-- Footer -->
-    <footer>
-        <div class="footer-grid">
-            <div class="footer-col">
-                <h3>GarzVoucher</h3>
-                <p>Platform top up game dan voucher termurah, tercepat, dan terpercaya di Indonesia dengan sistem pembayaran terlengkap.</p>
-            </div>
-            
-            <div class="footer-col">
-                <h3>Peta Situs</h3>
-                <ul class="footer-links">
-                    <li><a href="#"><i class="fas fa-chevron-right"></i> Beranda</a></li>
-                    <li><a href="#"><i class="fas fa-chevron-right"></i> Voucher</a></li>
-                    <li><a href="#"><i class="fas fa-chevron-right"></i> Cek Transaksi</a></li>
-                    <li><a href="#"><i class="fas fa-chevron-right"></i> Hubungi Kami</a></li>
-                </ul>
-            </div>
-            
-            <div class="footer-col">
-                <h3>Akun</h3>
-                <ul class="footer-links">
-                    <li><a href="#"><i class="fas fa-chevron-right"></i> Masuk</a></li>
-                    <li><a href="#"><i class="fas fa-chevron-right"></i> Daftar</a></li>
-                    <li><a href="#"><i class="fas fa-chevron-right"></i> Lupa Password</a></li>
-                    <li><a href="#"><i class="fas fa-chevron-right"></i> Profil Saya</a></li>
-                </ul>
-            </div>
-            
-            <div class="footer-col">
-                <h3>Dukungan</h3>
-                <ul class="footer-links">
-                    <li><a href="#"><i class="fas fa-chevron-right"></i> FAQ</a></li>
-                    <li><a href="#"><i class="fas fa-chevron-right"></i> Syarat & Ketentuan</a></li>
-                    <li><a href="#"><i class="fas fa-chevron-right"></i> Kebijakan Privasi</a></li>
-                    <li><a href="#"><i class="fas fa-chevron-right"></i> Cara Top Up</a></li>
-                </ul>
-            </div>
-        </div>
-        
-        <div class="footer-bottom">
-            <p>&copy; 2023 GarzVoucher. All Rights Reserved. Top up game & voucher terlaris, murah, aman legal 100%</p>
-        </div>
-    </footer>
-    
-    <!-- Login Modal -->
-    <div class="modal" id="loginModal">
-        <div class="modal-content">
-            <button class="close-modal" id="closeLogin">&times;</button>
-            <div class="modal-header">
-                <h2>Masuk ke Akun</h2>
-            </div>
-            <div class="modal-body">
-                <div class="form-group">
-                    <label for="loginEmail">Email atau Username</label>
-                    <input type="text" id="loginEmail" class="form-control" placeholder="Masukkan email atau username">
-                </div>
-                <div class="form-group">
-                    <label for="loginPassword">Kata Sandi</label>
-                    <input type="password" id="loginPassword" class="form-control" placeholder="Masukkan kata sandi">
-                </div>
-                <button class="btn btn-submit">Masuk Sekarang</button>
-                <div class="forgot-password">
-                    <a href="#" id="forgotPasswordLink">Lupa kata sandi?</a>
-                </div>
-                <div class="forgot-password">
-                    Belum punya akun? <a href="#" id="registerLinkModal">Daftar sekarang</a>
-                </div>
-            </div>
-        </div>
+<html class="scroll-smooth" lang="id">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <title>
+   GarzVoucher - Topup Games
+  </title>
+  <script src="https://cdn.tailwindcss.com">
+  </script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <style>
+   /* Custom scrollbar for dropdowns */
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 6px;
+  }
+  .scrollbar-thin::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background-color: #3b82f6;
+    border-radius: 3px;
+  }
+  </style>
+ </head>
+ <body class="bg-blue-50 text-blue-900 font-sans min-h-screen flex flex-col">
+  <!-- Navbar -->
+  <header class="bg-blue-600 text-white fixed top-0 left-0 right-0 z-50 shadow-md">
+   <div class="max-w-7xl mx-auto flex items-center justify-between px-4 sm:px-6 lg:px-8 h-16">
+    <a class="text-2xl font-extrabold tracking-wide select-none" href="#home">
+     GarzVoucher
+    </a>
+    <nav class="hidden md:flex space-x-6 text-lg font-semibold">
+     <a class="hover:text-blue-300 transition" href="#beranda">
+      Beranda
+     </a>
+     <a class="hover:text-blue-300 transition" href="#topup">
+      Top Up
+     </a>
+     <a class="hover:text-blue-300 transition" href="#voucher">
+      Voucher
+     </a>
+     <a class="hover:text-blue-300 transition" href="#cek-transaksi">
+      Cek Transaksi
+     </a>
+     <a class="hover:text-blue-300 transition" href="#hubungi-kami">
+      Hubungi Kami
+     </a>
+     <a class="hover:text-blue-300 transition" href="#ulasan">
+      Ulasan
+     </a>
+     <a class="hover:text-blue-300 transition" href="#syarat-ketentuan">
+      Syarat &amp; Ketentuan
+     </a>
+    </nav>
+    <div class="md:hidden flex items-center space-x-4">
+     <button aria-label="Cek Transaksi" class="hover:text-blue-300 focus:outline-none focus:ring-2 focus:ring-white" id="btnCekTransaksiMobile" title="Cek Transaksi">
+      <i class="fas fa-search">
+      </i>
+     </button>
+     <button aria-label="Menu" class="focus:outline-none focus:ring-2 focus:ring-white" id="btnMenuMobile" title="Menu">
+      <i class="fas fa-bars text-xl">
+      </i>
+     </button>
     </div>
-    
-    <!-- Register Modal -->
-    <div class="modal" id="registerModal">
-        <div class="modal-content">
-            <button class="close-modal" id="closeRegister">&times;</button>
-            <div class="modal-header">
-                <h2>Daftar Akun Baru</h2>
-            </div>
-            <div class="modal-body">
-                <div class="form-group">
-                    <label for="regName">Nama Lengkap</label>
-                    <input type="text" id="regName" class="form-control" placeholder="Masukkan nama lengkap">
-                </div>
-                <div class="form-group">
-                    <label for="regEmail">Email</label>
-                    <input type="email" id="regEmail" class="form-control" placeholder="Masukkan email">
-                </div>
-                <div class="form-group">
-                    <label for="regPhone">Nomor WhatsApp</label>
-                    <input type="tel" id="regPhone" class="form-control" placeholder="62+">
-                </div>
-                <div class="form-group">
-                    <label for="regPassword">Kata Sandi</label>
-                    <input type="password" id="regPassword" class="form-control" placeholder="Buat kata sandi">
-                </div>
-                <div class="form-group">
-                    <label for="regConfirmPassword">Konfirmasi Kata Sandi</label>
-                    <input type="password" id="regConfirmPassword" class="form-control" placeholder="Konfirmasi kata sandi">
-                </div>
-                <button class="btn btn-submit">Daftar Sekarang</button>
-                <div class="forgot-password">
-                    Sudah punya akun? <a href="#" id="loginLinkModal">Masuk sekarang</a>
-                </div>
-            </div>
-        </div>
+    <div class="hidden md:flex items-center space-x-4">
+     <button class="bg-blue-800 hover:bg-blue-700 px-3 py-1 rounded-md font-semibold transition focus:outline-none focus:ring-2 focus:ring-white" id="btnMasukDaftar">
+      Masuk / Daftar
+     </button>
     </div>
-    
-    <!-- Forgot Password Modal -->
-    <div class="modal" id="forgotModal">
-        <div class="modal-content">
-            <button class="close-modal" id="closeForgot">&times;</button>
-            <div class="modal-header">
-                <h2>Lupa Kata Sandi</h2>
-            </div>
-            <div class="modal-body">
-                <p>Lupa kata sandi Kamu? Tidak apa-apa. Beri tahu kami nomor whatsapp Kamu dan kami akan mengirimkan kode yang digunakan sebagai kata sandi baru ke email/wa Kamu untuk login.</p>
-                <div class="form-group">
-                    <label for="forgotPhone">Nomor WhatsApp</label>
-                    <input type="tel" id="forgotPhone" class="form-control" placeholder="62+">
-                </div>
-                <button class="btn btn-submit">Kirim Tautan Setel Ulang Kata Sandi</button>
-                <div class="forgot-password">
-                    <a href="#" id="registerLinkForgot">Menyerah dan akun baru aja</a>
-                </div>
-            </div>
-        </div>
+   </div>
+   <!-- Mobile menu -->
+   <nav class="hidden bg-blue-700 text-white px-4 pb-4 space-y-3 md:hidden" id="mobileMenu">
+    <a class="block py-1 hover:text-blue-300 transition" href="#beranda">
+     Beranda
+    </a>
+    <a class="block py-1 hover:text-blue-300 transition" href="#topup">
+     Top Up
+    </a>
+    <a class="block py-1 hover:text-blue-300 transition" href="#voucher">
+     Voucher
+    </a>
+    <a class="block py-1 hover:text-blue-300 transition" href="#cek-transaksi">
+     Cek Transaksi
+    </a>
+    <a class="block py-1 hover:text-blue-300 transition" href="#hubungi-kami">
+     Hubungi Kami
+    </a>
+    <a class="block py-1 hover:text-blue-300 transition" href="#ulasan">
+     Ulasan
+    </a>
+    <a class="block py-1 hover:text-blue-300 transition" href="#syarat-ketentuan">
+     Syarat &amp; Ketentuan
+    </a>
+    <button class="w-full bg-blue-800 hover:bg-blue-700 px-3 py-2 rounded-md font-semibold transition focus:outline-none focus:ring-2 focus:ring-white mt-2" id="btnMasukDaftarMobile">
+     Masuk / Daftar
+    </button>
+   </nav>
+  </header>
+  <main class="flex-grow pt-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+   <!-- Section: Beranda -->
+   <section class="mb-12" id="beranda">
+    <div class="text-center max-w-3xl mx-auto">
+     <h1 class="text-4xl font-extrabold mb-4">
+      Selamat Datang di GarzVoucher
+     </h1>
+     <p class="text-lg text-blue-800 mb-6">
+      Top up game &amp; voucher terlaris, murah, aman, legal 100%, buka 24 jam dengan payment terlengkap se-Indonesia.
+     </p>
+     <img alt="Ilustrasi digital voucher topup game dengan latar biru dan ikon diamond berkilau" class="mx-auto rounded-lg shadow-lg" height="300" src="https://storage.googleapis.com/a1aa/image/3bea0e5f-3f1b-44c0-4e6a-41c86f4c8827.jpg" width="600"/>
     </div>
-    
-    <!-- Topup Modal -->
-    <div class="modal" id="topupModal">
-        <div class="modal-content">
-            <button class="close-modal" id="closeTopup">&times;</button>
-            <div class="modal-header">
-                <h2>Top Up Diamond Mobile Legends</h2>
-            </div>
-            <div class="modal-body">
-                <div class="form-group">
-                    <label>Pilih Diamond</label>
-                    <div class="diamond-grid">
-                        <div class="diamond-option" onclick="selectDiamond(this)">
-                            <h4>86 Diamond</h4>
-                            <p>Rp 25.000</p>
-                        </div>
-                        <div class="diamond-option" onclick="selectDiamond(this)">
-                            <h4>172 Diamond</h4>
-                            <p>Rp 50.000</p>
-                        </div>
-                        <div class="diamond-option" onclick="selectDiamond(this)">
-                            <h4>257 Diamond</h4>
-                            <p>Rp 75.000</p>
-                        </div>
-                        <div class="diamond-option" onclick="selectDiamond(this)">
-                            <h4>344 Diamond</h4>
-                            <p>Rp 100.000</p>
-                        </div>
-                        <div class="diamond-option" onclick="selectDiamond(this)">
-                            <h4>429 Diamond</h4>
-                            <p>Rp 125.000</p>
-                        </div>
-                        <div class="diamond-option" onclick="selectDiamond(this)">
-                            <h4>514 Diamond</h4>
-                            <p>Rp 150.000</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                    <label for="gameId">ID Game</label>
-                    <input type="text" id="gameId" class="form-control" placeholder="Masukkan ID Game">
-                </div>
-                
-                <div class="form-group">
-                    <label for="gameNickname">Nickname</label>
-                    <input type="text" id="gameNickname" class="form-control" placeholder="Masukkan Nickname">
-                </div>
-                
-                <div class="form-group">
-                    <label>Jumlah Pembelian</label>
-                    <div class="quantity-control">
-                        <button class="quantity-btn" onclick="adjustQuantity(-1)">-</button>
-                        <input type="number" id="quantity" class="quantity-input" value="1" min="1">
-                        <button class="quantity-btn" onclick="adjustQuantity(1)">+</button>
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                    <label>Pilih Metode Pembayaran</label>
-                    <div class="payment-options">
-                        <div class="payment-option" onclick="selectPayment(this)">
-                            <i class="fab fa-gopuram"></i>
-                            <p>Gopay</p>
-                        </div>
-                        <div class="payment-option" onclick="selectPayment(this)">
-                            <i class="fab fa-cc-visa"></i>
-                            <p>OVO</p>
-                        </div>
-                        <div class="payment-option" onclick="selectPayment(this)">
-                            <i class="fab fa-cc-mastercard"></i>
-                            <p>Dana</p>
-                        </div>
-                        <div class="payment-option" onclick="selectPayment(this)">
-                            <i class="fab fa-cc-paypal"></i>
-                            <p>ShopeePay</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                    <label for="promoCode">Kode Promo (Opsional)</label>
-                    <div style="display: flex;">
-                        <input type="text" id="promoCode" class="form-control" placeholder="Ketik Kode Promo">
-                        <button class="btn" style="margin-left: 10px; background: var(--primary); color: white;">Gunakan</button>
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                    <label for="userEmail">Email</label>
-                    <input type="email" id="userEmail" class="form-control" placeholder="Masukkan email untuk bukti transaksi">
-                </div>
-                
-                <div class="form-group">
-                    <label for="userPhone">Nomor WhatsApp</label>
-                    <input type="tel" id="userPhone" class="form-control" placeholder="62+">
-                    <small>Nomor ini akan dihubungi jika terjadi masalah</small>
-                </div>
-                
-                <button class="btn btn-submit" onclick="showPaymentModal()">Buat Pesanan</button>
-                
-                <p style="text-align: center; margin-top: 15px;">
-                    <a href="#" style="color: var(--primary);">Butuh bantuan? Hubungi admin disini</a>
-                </p>
-            </div>
-        </div>
+   </section>
+   <!-- Section: Top Up Games -->
+   <section class="mb-12" id="topup">
+    <h2 class="text-3xl font-bold mb-6 border-b-4 border-blue-600 inline-block pb-1">
+     Top Up Games
+    </h2>
+    <!-- Game Selection -->
+    <div class="mb-8">
+     <h3 class="text-xl font-semibold mb-3">
+      Pilih Game
+     </h3>
+     <div class="flex flex-wrap gap-4">
+      <button class="game-btn flex-1 min-w-[140px] bg-blue-500 hover:bg-blue-600 text-white rounded-lg p-4 flex flex-col items-center transition focus:outline-none focus:ring-2 focus:ring-blue-700" data-game="Mobile Legends: Bang Bang">
+       <img alt="Logo Mobile Legends: Bang Bang dengan latar biru dan ikon diamond" class="mb-2" height="100" src="https://storage.googleapis.com/a1aa/image/4fe49e1a-8ba1-4344-0292-124f108ec381.jpg" width="100"/>
+       Mobile Legends
+      </button>
+      <button class="game-btn flex-1 min-w-[140px] bg-blue-500 hover:bg-blue-600 text-white rounded-lg p-4 flex flex-col items-center transition focus:outline-none focus:ring-2 focus:ring-blue-700" data-game="Free Fire">
+       <img alt="Logo Free Fire dengan latar biru dan ikon api" class="mb-2" height="100" src="https://storage.googleapis.com/a1aa/image/c8668707-9def-4649-057e-b64b3d7b9497.jpg" width="100"/>
+       Free Fire
+      </button>
+      <button class="game-btn flex-1 min-w-[140px] bg-blue-500 hover:bg-blue-600 text-white rounded-lg p-4 flex flex-col items-center transition focus:outline-none focus:ring-2 focus:ring-blue-700" data-game="Free Fire MAX">
+       <img alt="Logo Free Fire MAX dengan latar biru dan ikon api besar" class="mb-2" height="100" src="https://storage.googleapis.com/a1aa/image/1bf26850-64ac-4db2-8d24-69729cf9c898.jpg" width="100"/>
+       Free Fire MAX
+      </button>
+      <button class="game-btn flex-1 min-w-[140px] bg-blue-500 hover:bg-blue-600 text-white rounded-lg p-4 flex flex-col items-center transition focus:outline-none focus:ring-2 focus:ring-blue-700" data-game="Roblox">
+       <img alt="Logo Roblox dengan latar biru dan ikon kubus" class="mb-2" height="100" src="https://files.catbox.moe/6qkmh7.jpg" width="100"/>
+       Roblox
+      </button>
+     </div>
     </div>
-    
-    <!-- Payment Modal -->
-    <div class="modal" id="paymentModal">
-        <div class="modal-content">
-            <button class="close-modal" id="closePayment">&times;</button>
-            <div class="modal-header">
-                <h2>Menunggu Pembayaran</h2>
-            </div>
-            <div class="modal-body">
-                <div style="text-align: center; margin-bottom: 20px;">
-                    <div style="font-size: 2rem; color: var(--warning);">
-                        <i class="fas fa-clock"></i>
-                    </div>
-                    <h3>Proses Transaksi</h3>
-                    <div id="paymentTimer" style="font-size: 1.8rem; font-weight: bold; margin: 10px 0;">02:56:10</div>
-                </div>
-                
-                <div class="form-group">
-                    <label>Metode Pembayaran</label>
-                    <div style="display: flex; align-items: center; background: #f9f9f9; padding: 15px; border-radius: 8px;">
-                        <i class="fab fa-gopuram" style="font-size: 2.5rem; color: var(--primary); margin-right: 15px;"></i>
-                        <div>
-                            <h3>Gopay</h3>
-                            <p>Transfer ke nomor 081234567890</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                    <label>Detail Pembayaran</label>
-                    <div style="background: #f9f9f9; padding: 15px; border-radius: 8px;">
-                        <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
-                            <span>Nomor Invoice:</span>
-                            <span>GV-20230728-001</span>
-                        </div>
-                        <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
-                            <span>Status Pembayaran:</span>
-                            <span style="color: var(--danger); font-weight: bold;">Unpaid</span>
-                        </div>
-                        <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
-                            <span>Status Transaksi:</span>
-                            <span style="color: var(--warning); font-weight: bold;">Pending</span>
-                        </div>
-                        <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
-                            <span>Total Pembayaran:</span>
-                            <span style="font-weight: bold; font-size: 1.2rem;">Rp 100.000</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <p style="text-align: center; margin: 20px 0; font-weight: 500; color: var(--dark);">
-                    Silahkan untuk melakukan pembayaran dengan metode yang kamu pilih
-                </p>
-                
-                <button class="btn btn-submit">Klik Disini untuk Melakukan Pembayaran</button>
-            </div>
-        </div>
+    <!-- Diamond Selection Grid 5x5 -->
+    <div class="mb-8" id="diamondGridContainer">
+     <h3 class="text-xl font-semibold mb-3">
+      Pilih Diamond
+     </h3>
+     <div class="grid grid-cols-5 gap-4 max-w-4xl mx-auto" id="diamondGrid">
+      <!-- 25 diamond items -->
+      <button class="diamond-btn bg-blue-400 hover:bg-blue-500 text-white rounded-lg py-3 font-semibold transition focus:outline-none focus:ring-2 focus:ring-blue-700" data-diamond="10 Diamond">
+       10 Diamond
+      </button>
+      <button class="diamond-btn bg-blue-400 hover:bg-blue-500 text-white rounded-lg py-3 font-semibold transition focus:outline-none focus:ring-2 focus:ring-blue-700" data-diamond="20 Diamond">
+       20 Diamond
+      </button>
+      <button class="diamond-btn bg-blue-400 hover:bg-blue-500 text-white rounded-lg py-3 font-semibold transition focus:outline-none focus:ring-2 focus:ring-blue-700" data-diamond="30 Diamond">
+       30 Diamond
+      </button>
+      <button class="diamond-btn bg-blue-400 hover:bg-blue-500 text-white rounded-lg py-3 font-semibold transition focus:outline-none focus:ring-2 focus:ring-blue-700" data-diamond="40 Diamond">
+       40 Diamond
+      </button>
+      <button class="diamond-btn bg-blue-400 hover:bg-blue-500 text-white rounded-lg py-3 font-semibold transition focus:outline-none focus:ring-2 focus:ring-blue-700" data-diamond="50 Diamond">
+       50 Diamond
+      </button>
+      <button class="diamond-btn bg-blue-400 hover:bg-blue-500 text-white rounded-lg py-3 font-semibold transition focus:outline-none focus:ring-2 focus:ring-blue-700" data-diamond="60 Diamond">
+       60 Diamond
+      </button>
+      <button class="diamond-btn bg-blue-400 hover:bg-blue-500 text-white rounded-lg py-3 font-semibold transition focus:outline-none focus:ring-2 focus:ring-blue-700" data-diamond="70 Diamond">
+       70 Diamond
+      </button>
+      <button class="diamond-btn bg-blue-400 hover:bg-blue-500 text-white rounded-lg py-3 font-semibold transition focus:outline-none focus:ring-2 focus:ring-blue-700" data-diamond="80 Diamond">
+       80 Diamond
+      </button>
+      <button class="diamond-btn bg-blue-400 hover:bg-blue-500 text-white rounded-lg py-3 font-semibold transition focus:outline-none focus:ring-2 focus:ring-blue-700" data-diamond="90 Diamond">
+       90 Diamond
+      </button>
+      <button class="diamond-btn bg-blue-400 hover:bg-blue-500 text-white rounded-lg py-3 font-semibold transition focus:outline-none focus:ring-2 focus:ring-blue-700" data-diamond="100 Diamond">
+       100 Diamond
+      </button>
+      <button class="diamond-btn bg-blue-400 hover:bg-blue-500 text-white rounded-lg py-3 font-semibold transition focus:outline-none focus:ring-2 focus:ring-blue-700" data-diamond="110 Diamond">
+       110 Diamond
+      </button>
+      <button class="diamond-btn bg-blue-400 hover:bg-blue-500 text-white rounded-lg py-3 font-semibold transition focus:outline-none focus:ring-2 focus:ring-blue-700" data-diamond="120 Diamond">
+       120 Diamond
+      </button>
+      <button class="diamond-btn bg-blue-400 hover:bg-blue-500 text-white rounded-lg py-3 font-semibold transition focus:outline-none focus:ring-2 focus:ring-blue-700" data-diamond="130 Diamond">
+       130 Diamond
+      </button>
+      <button class="diamond-btn bg-blue-400 hover:bg-blue-500 text-white rounded-lg py-3 font-semibold transition focus:outline-none focus:ring-2 focus:ring-blue-700" data-diamond="140 Diamond">
+       140 Diamond
+      </button>
+      <button class="diamond-btn bg-blue-400 hover:bg-blue-500 text-white rounded-lg py-3 font-semibold transition focus:outline-none focus:ring-2 focus:ring-blue-700" data-diamond="150 Diamond">
+       150 Diamond
+      </button>
+      <button class="diamond-btn bg-blue-400 hover:bg-blue-500 text-white rounded-lg py-3 font-semibold transition focus:outline-none focus:ring-2 focus:ring-blue-700" data-diamond="160 Diamond">
+       160 Diamond
+      </button>
+      <button class="diamond-btn bg-blue-400 hover:bg-blue-500 text-white rounded-lg py-3 font-semibold transition focus:outline-none focus:ring-2 focus:ring-blue-700" data-diamond="170 Diamond">
+       170 Diamond
+      </button>
+      <button class="diamond-btn bg-blue-400 hover:bg-blue-500 text-white rounded-lg py-3 font-semibold transition focus:outline-none focus:ring-2 focus:ring-blue-700" data-diamond="180 Diamond">
+       180 Diamond
+      </button>
+      <button class="diamond-btn bg-blue-400 hover:bg-blue-500 text-white rounded-lg py-3 font-semibold transition focus:outline-none focus:ring-2 focus:ring-blue-700" data-diamond="190 Diamond">
+       190 Diamond
+      </button>
+      <button class="diamond-btn bg-blue-400 hover:bg-blue-500 text-white rounded-lg py-3 font-semibold transition focus:outline-none focus:ring-2 focus:ring-blue-700" data-diamond="200 Diamond">
+       200 Diamond
+      </button>
+      <button class="diamond-btn bg-blue-400 hover:bg-blue-500 text-white rounded-lg py-3 font-semibold transition focus:outline-none focus:ring-2 focus:ring-blue-700" data-diamond="210 Diamond">
+       210 Diamond
+      </button>
+      <button class="diamond-btn bg-blue-400 hover:bg-blue-500 text-white rounded-lg py-3 font-semibold transition focus:outline-none focus:ring-2 focus:ring-blue-700" data-diamond="220 Diamond">
+       220 Diamond
+      </button>
+      <button class="diamond-btn bg-blue-400 hover:bg-blue-500 text-white rounded-lg py-3 font-semibold transition focus:outline-none focus:ring-2 focus:ring-blue-700" data-diamond="230 Diamond">
+       230 Diamond
+      </button>
+      <button class="diamond-btn bg-blue-400 hover:bg-blue-500 text-white rounded-lg py-3 font-semibold transition focus:outline-none focus:ring-2 focus:ring-blue-700" data-diamond="240 Diamond">
+       240 Diamond
+      </button>
+      <button class="diamond-btn bg-blue-400 hover:bg-blue-500 text-white rounded-lg py-3 font-semibold transition focus:outline-none focus:ring-2 focus:ring-blue-700" data-diamond="250 Diamond">
+       250 Diamond
+      </button>
+     </div>
     </div>
-    
-    <script>
-        // Modal functionality
-        const loginModal = document.getElementById('loginModal');
-        const registerModal = document.getElementById('registerModal');
-        const forgotModal = document.getElementById('forgotModal');
-        const topupModal = document.getElementById('topupModal');
-        const paymentModal = document.getElementById('paymentModal');
-        
-        document.getElementById('loginBtn').addEventListener('click', () => {
-            loginModal.style.display = 'flex';
-        });
-        
-        document.getElementById('registerBtn').addEventListener('click', () => {
-            registerModal.style.display = 'flex';
-        });
-        
-        document.getElementById('forgotPasswordLink').addEventListener('click', (e) => {
-            e.preventDefault();
-            loginModal.style.display = 'none';
-            forgotModal.style.display = 'flex';
-        });
-        
-        document.getElementById('registerLinkModal').addEventListener('click', (e) => {
-            e.preventDefault();
-            loginModal.style.display = 'none';
-            registerModal.style.display = 'flex';
-        });
-        
-        document.getElementById('loginLinkModal').addEventListener('click', (e) => {
-            e.preventDefault();
-            registerModal.style.display = 'none';
-            loginModal.style.display = 'flex';
-        });
-        
-        document.getElementById('registerLinkForgot').addEventListener('click', (e) => {
-            e.preventDefault();
-            forgotModal.style.display = 'none';
-            registerModal.style.display = 'flex';
-        });
-        
-        // Close modals
-        document.getElementById('closeLogin').addEventListener('click', () => {
-            loginModal.style.display = 'none';
-        });
-        
-        document.getElementById('closeRegister').addEventListener('click', () => {
-            registerModal.style.display = 'none';
-        });
-        
-        document.getElementById('closeForgot').addEventListener('click', () => {
-            forgotModal.style.display = 'none';
-        });
-        
-        document.getElementById('closeTopup').addEventListener('click', () => {
-            topupModal.style.display = 'none';
-        });
-        
-        document.getElementById('closePayment').addEventListener('click', () => {
-            paymentModal.style.display = 'none';
-        });
-        
-        // Close modal when clicking outside
-        window.addEventListener('click', (e) => {
-            if (e.target === loginModal) loginModal.style.display = 'none';
-            if (e.target === registerModal) registerModal.style.display = 'none';
-            if (e.target === forgotModal) forgotModal.style.display = 'none';
-            if (e.target === topupModal) topupModal.style.display = 'none';
-            if (e.target === paymentModal) paymentModal.style.display = 'none';
-        });
-        
-        // Open topup modal when clicking on game cards
-        const gameCards = document.querySelectorAll('.game-card');
-        gameCards.forEach(card => {
-            card.addEventListener('click', () => {
-                topupModal.style.display = 'flex';
-            });
-        });
-        
-        // Diamond selection
-        function selectDiamond(element) {
-            document.querySelectorAll('.diamond-option').forEach(option => {
-                option.classList.remove('selected');
-            });
-            element.classList.add('selected');
-        }
-        
-        // Quantity adjustment
-        function adjustQuantity(value) {
-            const quantityInput = document.getElementById('quantity');
-            let currentValue = parseInt(quantityInput.value);
-            if (currentValue + value > 0) {
-                quantityInput.value = currentValue + value;
-            }
-        }
-        
-        // Payment selection
-        function selectPayment(element) {
-            document.querySelectorAll('.payment-option').forEach(option => {
-                option.classList.remove('selected');
-            });
-            element.classList.add('selected');
-        }
-        
-        // Show payment modal
-        function showPaymentModal() {
-            topupModal.style.display = 'none';
-            paymentModal.style.display = 'flex';
-            startPaymentTimer();
-        }
-        
-        // Payment timer
-        function startPaymentTimer() {
-            let timeLeft = 2 * 60 * 60 + 56 * 60 + 10; // 2 hours 56 minutes 10 seconds
-            const timerElement = document.getElementById('paymentTimer');
-            
-            const timer = setInterval(() => {
-                timeLeft--;
-                
-                if (timeLeft < 0) {
-                    clearInterval(timer);
-                    timerElement.textContent = "00:00:00";
-                    return;
-                }
-                
-                const hours = Math.floor(timeLeft / 3600);
-                const minutes = Math.floor((timeLeft % 3600) / 60);
-                const seconds = timeLeft % 60;
-                
-                timerElement.textContent = 
-                    `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-            }, 1000);
-        }
-        
-        // Mobile menu toggle
-        document.getElementById('menuToggle').addEventListener('click', () => {
-            const navLinks = document.querySelector('.nav-links');
-            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
-        });
-    </script>
-</body>
+    <!-- Form Top Up -->
+    <form autocomplete="off" class="max-w-3xl mx-auto bg-white p-6 rounded-lg shadow-md space-y-6" id="topupForm" novalidate="">
+     <h3 class="text-xl font-semibold mb-4">
+      Masukan Data Akun &amp; Pembayaran
+     </h3>
+     <div>
+      <label class="block font-semibold mb-1" for="gameSelected">
+       Game
+      </label>
+      <input class="w-full border border-blue-300 rounded-md px-3 py-2 bg-blue-50 cursor-not-allowed" id="gameSelected" name="gameSelected" placeholder="Pilih game terlebih dahulu" readonly="" required="" type="text"/>
+     </div>
+     <div>
+      <label class="block font-semibold mb-1" for="diamondSelected">
+       Diamond
+      </label>
+      <input class="w-full border border-blue-300 rounded-md px-3 py-2 bg-blue-50 cursor-not-allowed" id="diamondSelected" name="diamondSelected" placeholder="Pilih diamond terlebih dahulu" readonly="" required="" type="text"/>
+     </div>
+     <div>
+      <label class="block font-semibold mb-1" for="idGame">
+       ID® (Masukan ID Game kalian)
+      </label>
+      <input class="w-full border border-blue-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-600" id="idGame" name="idGame" placeholder="Masukan ID Game" required="" type="text"/>
+     </div>
+     <div class="flex items-center space-x-3">
+      <label class="block font-semibold mb-1 flex-1" for="jumlahBeli">
+       Jumlah Pembelian
+      </label>
+      <div class="flex items-center space-x-2">
+       <button class="bg-blue-600 hover:bg-blue-700 text-white rounded px-3 py-1 font-bold focus:outline-none focus:ring-2 focus:ring-blue-700" id="kurangJumlah" type="button">
+        -
+       </button>
+       <input class="w-20 text-center border border-blue-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-600" id="jumlahBeli" min="1" name="jumlahBeli" required="" type="number" value="1"/>
+       <button class="bg-blue-600 hover:bg-blue-700 text-white rounded px-3 py-1 font-bold focus:outline-none focus:ring-2 focus:ring-blue-700" id="tambahJumlah" type="button">
+        +
+       </button>
+      </div>
+     </div>
+     <div>
+      <label class="block font-semibold mb-1" for="metodePembayaran">
+       Pilih Pembayaran
+      </label>
+      <select class="w-full border border-blue-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-600" id="metodePembayaran" name="metodePembayaran" required="">
+       <option disabled="" selected="" value="">
+        Pilih metode pembayaran
+       </option>
+       <option value="Dana">
+        Dana
+       </option>
+       <option value="OVO">
+        OVO
+       </option>
+       <option value="GoPay">
+        GoPay
+       </option>
+       <option value="Transfer Bank">
+        Transfer Bank
+       </option>
+       <option value="ShopeePay">
+        ShopeePay
+       </option>
+      </select>
+     </div>
+     <div>
+      <label class="block font-semibold mb-1" for="kodePromo">
+       Kode Promo
+      </label>
+      <div class="flex space-x-2">
+       <input class="flex-grow border border-blue-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-600" id="kodePromo" name="kodePromo" placeholder="Ketik Kode Promo kamu" type="text"/>
+       <button class="bg-blue-600 hover:bg-blue-700 text-white rounded-md px-4 py-2 font-semibold focus:outline-none focus:ring-2 focus:ring-blue-700" id="btnGunakanPromo" type="button">
+        Gunakan
+       </button>
+      </div>
+     </div>
+     <div>
+      <label class="block font-semibold mb-1" for="emailKontak">
+       Email
+      </label>
+      <input class="w-full border border-blue-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-600" id="emailKontak" name="emailKontak" placeholder="Masukan email kamu" required="" type="email"/>
+     </div>
+     <div>
+      <label class="block font-semibold mb-1" for="whatsappKontak">
+       No Whatsapp
+      </label>
+      <input class="w-full border border-blue-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-600" id="whatsappKontak" name="whatsappKontak" placeholder="Masukan nomor Whatsapp kamu (62+)" required="" type="tel"/>
+      <p class="text-sm text-blue-700 mt-1 italic">
+       Nomor ini akan dihubungi jika terjadi masalah
+      </p>
+     </div>
+     <p class="text-sm text-blue-800 italic">
+      ® Bukti transaksi akan kami kirim ke email/wa yang kamu isi diatas.
+     </p>
+     <button class="w-full bg-blue-700 hover:bg-blue-800 text-white font-bold py-3 rounded-md transition focus:outline-none focus:ring-2 focus:ring-blue-900" type="submit">
+      Buat Pesanan
+     </button>
+    </form>
+   </section>
+   <!-- Section: Voucher -->
+   <section class="mb-12 max-w-3xl mx-auto" id="voucher">
+    <h2 class="text-3xl font-bold mb-6 border-b-4 border-blue-600 inline-block pb-1">
+     Voucher
+    </h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+     <div class="bg-white rounded-lg shadow p-4 flex items-center space-x-4">
+      <img alt="Voucher diskon 10 persen dengan latar biru dan ikon tag diskon" class="w-20 h-20 rounded-md" height="80" src="https://storage.googleapis.com/a1aa/image/22800619-4f1c-4c4e-9e9d-1125c10c0318.jpg" width="80"/>
+      <div>
+       <h3 class="font-semibold text-lg">
+        Voucher Diskon 10%
+       </h3>
+       <p class="text-blue-700">
+        Gunakan kode GARZ10 untuk potongan 10% pada pembelian diamond.
+       </p>
+      </div>
+     </div>
+     <div class="bg-white rounded-lg shadow p-4 flex items-center space-x-4">
+      <img alt="Voucher diskon 20 persen dengan latar biru dan ikon tag diskon" class="w-20 h-20 rounded-md" height="80" src="https://storage.googleapis.com/a1aa/image/6ca29fd8-0495-4810-86e3-a32d37b0f0c7.jpg" width="80"/>
+      <div>
+       <h3 class="font-semibold text-lg">
+        Voucher Diskon 20%
+       </h3>
+       <p class="text-blue-700">
+        Gunakan kode GARZ20 untuk potongan 20% pada pembelian diamond tertentu.
+       </p>
+      </div>
+     </div>
+    </div>
+   </section>
+   <!-- Section: Cek Transaksi -->
+   <section class="mb-12 max-w-3xl mx-auto" id="cek-transaksi">
+    <h2 class="text-3xl font-bold mb-6 border-b-4 border-blue-600 inline-block pb-1">
+     Cek Transaksi
+    </h2>
+    <p class="mb-4">
+     Anda harus mendaftar akun dulu untuk dapat mengecek transaksi.
+    </p>
+    <button class="bg-blue-700 hover:bg-blue-800 text-white font-bold py-3 px-6 rounded-md transition focus:outline-none focus:ring-2 focus:ring-blue-900" id="btnCekTransaksi">
+     Masuk / Daftar
+    </button>
+   </section>
+   <!-- Section: Menunggu Pembayaran -->
+   <section class="mb-12 max-w-3xl mx-auto hidden bg-white p-6 rounded-lg shadow-md" id="menunggu-pembayaran">
+    <h2 class="text-3xl font-bold mb-6 border-b-4 border-blue-600 inline-block pb-1">
+     Menunggu Pembayaran
+    </h2>
+    <div class="space-y-3">
+     <p>
+      <strong>
+       Progres Transaksi:
+      </strong>
+      <span id="countdownTimer">
+       2 jam 56 menit 10 detik
+      </span>
+     </p>
+     <p>
+      <strong>
+       Metode Pembayaran yang kamu pilih:
+      </strong>
+      <span id="metodePembayaranStatus">
+       -
+      </span>
+     </p>
+     <p>
+      <strong>
+       Nomor Invoice:
+      </strong>
+      <span id="nomorInvoice">
+       -
+      </span>
+     </p>
+     <p>
+      <strong>
+       Status Pembayaran:
+      </strong>
+      <span id="statusPembayaran">
+       Unpaid
+      </span>
+     </p>
+     <p>
+      <strong>
+       Status Transaksi:
+      </strong>
+      <span id="statusTransaksi">
+       Pending
+      </span>
+     </p>
+     <p>
+      <strong>
+       Pesan:
+      </strong>
+      Silahkan untuk melakukan pembayaran dengan metode yang kamu pilih.
+     </p>
+     <button class="bg-blue-700 hover:bg-blue-800 text-white font-bold py-3 px-6 rounded-md transition focus:outline-none focus:ring-2 focus:ring-blue-900" id="btnLakukanPembayaran">
+      Klik disini untuk melakukan pembayaran yang kamu pilih metode pembayaran
+     </button>
+    </div>
+   </section>
+   <!-- Section: Lupa Kata Sandi -->
+   <section class="mb-12 max-w-3xl mx-auto bg-white p-6 rounded-lg shadow-md" id="lupa-kata-sandi">
+    <h2 class="text-3xl font-bold mb-6 border-b-4 border-blue-600 inline-block pb-1">
+     Lupa Kata Sandi Kamu?
+    </h2>
+    <p class="mb-4">
+     Tidak apa-apa. Beri tahu kami nomor whatsapp Kamu dan kami akan mengirimkan kode yang digunakan sebagai kata sandi baru ke email/wa Kamu untuk login.
+    </p>
+    <form autocomplete="off" class="space-y-4" id="formLupaPassword" novalidate="">
+     <label class="block font-semibold" for="whatsappLupa">
+      Nomor Whatsapp (62+)
+     </label>
+     <input class="w-full border border-blue-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-600" id="whatsappLupa" name="whatsappLupa" placeholder="Masukan nomor Whatsapp kamu" required="" type="tel"/>
+     <button class="bg-blue-700 hover:bg-blue-800 text-white font-bold py-3 px-6 rounded-md transition focus:outline-none focus:ring-2 focus:ring-blue-900" type="submit">
+      Kirim tautan setel ulang kata sandi
+     </button>
+    </form>
+    <p class="mt-4 text-center text-blue-800">
+     Menyerah dan akun baru aja.
+    </p>
+    <div class="text-center mt-2">
+     <button class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-5 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-900" id="btnDaftarLupa">
+      Pencet daftar
+     </button>
+    </div>
+   </section>
+   <!-- Section: Hubungi Kami -->
+   <section class="mb-12 max-w-3xl mx-auto bg-white p-6 rounded-lg shadow-md" id="hubungi-kami">
+    <h2 class="text-3xl font-bold mb-6 border-b-4 border-blue-600 inline-block pb-1">
+     Hubungi Kami
+    </h2>
+    <p class="mb-4">
+     Mengalami masalah dengan waktu transaksi? Ingin memiliki bisnis permainan kredit? Silakan hubungi kami di bawah ini sesuai dengan kebutuhan Kamu!
+    </p>
+    <ul class="mb-4 space-y-1 text-blue-800">
+     <li>
+      <i class="fas fa-map-marker-alt mr-2 text-blue-600">
+      </i>
+      Indonesia
+     </li>
+     <li>
+      <i class="fas fa-envelope mr-2 text-blue-600">
+      </i>
+      Email:
+      <a class="underline hover:text-blue-900" href="mailto:garzvoucher@gmail.com">
+       garzvoucher@gmail.com
+      </a>
+     </li>
+     <li>
+      <i class="fab fa-whatsapp mr-2 text-blue-600">
+      </i>
+      Whatsapp:
+      <a class="underline hover:text-blue-900" href="https://wa.me/62895402128077" rel="noopener noreferrer" target="_blank">
+       62895402128077
+      </a>
+     </li>
+    </ul>
+    <p class="text-blue-700 italic">
+     Top up game &amp; voucher terlaris, murah, aman legal 100% buka 24 jam dengan payment terlengkap se-Indonesia.
+    </p>
+   </section>
+   <!-- Section: Ulasan Top Up -->
+   <section class="mb-12 max-w-3xl mx-auto" id="ulasan">
+    <h2 class="text-3xl font-bold mb-6 border-b-4 border-blue-600 inline-block pb-1">
+     ULASAN TOP UP
+    </h2>
+    <p class="mb-6">
+     Terimakasih kepada semua pelanggan yang memberikan ulasan dan penilaian kepada kami.
+    </p>
+    <div class="space-y-6">
+     <div class="bg-white p-4 rounded-lg shadow-md">
+      <p class="font-semibold text-blue-900">
+       Rizky A.
+      </p>
+      <p class="text-blue-700">
+       Pelayanan cepat dan harga sangat bersaing. Diamond langsung masuk tanpa masalah. Terima kasih GarzVoucher!
+      </p>
+      <div class="text-yellow-400">
+       <i class="fas fa-star">
+       </i>
+       <i class="fas fa-star">
+       </i>
+       <i class="fas fa-star">
+       </i>
+       <i class="fas fa-star">
+       </i>
+       <i class="fas fa-star-half-alt">
+       </i>
+      </div>
+     </div>
+     <div class="bg-white p-4 rounded-lg shadow-md">
+      <p class="font-semibold text-blue-900">
+       Sari W.
+      </p>
+      <p class="text-blue-700">
+       Sangat membantu saat saya butuh top up cepat. Metode pembayaran lengkap dan mudah digunakan.
+      </p>
+      <div class="text-yellow-400">
+       <i class="fas fa-star">
+       </i>
+       <i class="fas fa-star">
+       </i>
+       <i class="fas fa-star">
+       </i>
+       <i class="fas fa-star">
+       </i>
+       <i class="fas fa-star">
+       </i>
+      </div>
+     </div>
+     <div class="bg-white p-4 rounded-lg shadow-md">
+      <p class="font-semibold text-blue-900">
+       Dedi P.
+      </p>
+      <p class="text-blue-700">
+       Rekomendasi banget buat yang mau top up murah dan aman. Supportnya juga ramah dan cepat respon.
+      </p>
+      <div class="text-yellow-400">
+       <i class="fas fa-star">
+       </i>
+       <i class="fas fa-star">
+       </i>
+       <i class="fas fa-star">
+       </i>
+       <i class="fas fa-star-half-alt">
+       </i>
+       <i class="fas fa-star">
+       </i>
+      </div>
+     </div>
+    </div>
+   </section>
+   <!-- Section: Syarat & Ketentuan -->
+   <section class="mb-12 max-w-3xl mx-auto bg-white p-6 rounded-lg shadow-md" id="syarat-ketentuan">
+    <h2 class="text-3xl font-bold mb-6 border-b-4 border-blue-600 inline-block pb-1">
+     Syarat &amp; Ketentuan
+    </h2>
+    <p>
+     Top up game &amp; voucher terlaris, murah, aman legal 100% buka 24 jam dengan payment terlengkap se-Indonesia.
+    </p>
+   </section>
+  </main>
+  <!-- Footer -->
+  <footer class="bg-blue-600 text-white py-6 mt-auto">
+   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-wrap justify-center gap-4 text-sm font-semibold">
+    <a class="hover:text-blue-300 transition" href="#peta-situs">
+     Peta Situs
+    </a>
+    <a class="hover:text-blue-300 transition" href="#beranda">
+     Beranda
+    </a>
+    <a class="hover:text-blue-300 transition" href="#topup">
+     Masuk
+    </a>
+    <a class="hover:text-blue-300 transition" href="#topup">
+     Daftar
+    </a>
+    <a class="hover:text-blue-300 transition" href="#cek-transaksi">
+     Cek Transaksi
+    </a>
+    <a class="hover:text-blue-300 transition" href="#hubungi-kami">
+     Hubungi Kami
+    </a>
+    <a class="hover:text-blue-300 transition" href="#ulasan">
+     Ulasan
+    </a>
+    <a class="hover:text-blue-300 transition" href="#syarat-ketentuan">
+     Dukungan
+    </a>
+   </div>
+   <p class="text-center text-blue-200 mt-4 text-xs select-none">
+    © 2024 GarzVoucher. All rights reserved.
+   </p>
+  </footer>
+  <!-- Modal: Masuk / Daftar -->
+  <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 hidden z-50" id="modalMasukDaftar">
+   <div class="bg-white rounded-lg max-w-md w-full p-6 relative shadow-lg">
+    <button aria-label="Tutup modal" class="absolute top-3 right-3 text-gray-600 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-600 rounded-full p-1" id="closeModalMasukDaftar">
+     <i class="fas fa-times text-xl">
+     </i>
+    </button>
+    <h3 class="text-2xl font-bold mb-4 text-center text-blue-900">
+     Masuk / Daftar Akun
+    </h3>
+    <div class="flex justify-center space-x-4 mb-6">
+     <button class="tab-btn bg-blue-600 text-white px-4 py-2 rounded-md font-semibold focus:outline-none focus:ring-2 focus:ring-blue-700" id="btnTabMasuk">
+      Masuk
+     </button>
+     <button class="tab-btn bg-blue-200 text-blue-900 px-4 py-2 rounded-md font-semibold focus:outline-none focus:ring-2 focus:ring-blue-700" id="btnTabDaftar">
+      Daftar
+     </button>
+    </div>
+    <form class="space-y-4" id="formMasuk">
+     <div>
+      <label class="block font-semibold mb-1" for="emailMasuk">
+       Email
+      </label>
+      <input class="w-full border border-blue-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-600" id="emailMasuk" name="emailMasuk" placeholder="Masukan email" required="" type="email"/>
+     </div>
+     <div>
+      <label class="block font-semibold mb-1" for="passwordMasuk">
+       Kata Sandi
+      </label>
+      <input class="w-full border border-blue-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-600" id="passwordMasuk" name="passwordMasuk" placeholder="Masukan kata sandi" required="" type="password"/>
+     </div>
+     <button class="w-full bg-blue-700 hover:bg-blue-800 text-white font-bold py-3 rounded-md transition focus:outline-none focus:ring-2 focus:ring-blue-900" type="submit">
+      Masuk
+     </button>
+     <p class="text-center mt-2 text-blue-700 cursor-pointer hover:underline" id="linkLupaPassword">
+      Lupa kata sandi mu?
+     </p>
+    </form>
+    <form class="space-y-4 hidden" id="formDaftar">
+     <div>
+      <label class="block font-semibold mb-1" for="emailDaftar">
+       Email
+      </label>
+      <input class="w-full border border-blue-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-600" id="emailDaftar" name="emailDaftar" placeholder="Masukan email" required="" type="email"/>
+     </div>
+     <div>
+      <label class="block font-semibold mb-1" for="passwordDaftar">
+       Kata Sandi
+      </label>
+      <input class="w-full border border-blue-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-600" id="passwordDaftar" name="passwordDaftar" placeholder="Buat kata sandi" required="" type="password"/>
+     </div>
+     <button class="w-full bg-blue-700 hover:bg-blue-800 text-white font-bold py-3 rounded-md transition focus:outline-none focus:ring-2 focus:ring-blue-900" type="submit">
+      Daftar
+     </button>
+    </form>
+   </div>
+  </div>
+  <!-- Modal: Lupa Kata Sandi -->
+  <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 hidden z-50" id="modalLupaPassword">
+   <div class="bg-white rounded-lg max-w-md w-full p-6 relative shadow-lg">
+    <button aria-label="Tutup modal" class="absolute top-3 right-3 text-gray-600 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-600 rounded-full p-1" id="closeModalLupaPassword">
+     <i class="fas fa-times text-xl">
+     </i>
+    </button>
+    <h3 class="text-2xl font-bold mb-4 text-center text-blue-900">
+     Lupa Kata Sandi
+    </h3>
+    <p class="mb-4">
+     Tidak apa-apa. Beri tahu kami nomor whatsapp Kamu dan kami akan mengirimkan kode yang digunakan sebagai kata sandi baru ke email/wa Kamu untuk login.
+    </p>
+    <form autocomplete="off" class="space-y-4" id="formModalLupaPassword" novalidate="">
+     <label class="block font-semibold" for="whatsappModalLupa">
+      Nomor Whatsapp (62+)
+     </label>
+     <input class="w-full border border-blue-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-600" id="whatsappModalLupa" name="whatsappModalLupa" placeholder="Masukan nomor Whatsapp kamu" required="" type="tel"/>
+     <button class="bg-blue-700 hover:bg-blue-800 text-white font-bold py-3 px-6 rounded-md transition focus:outline-none focus:ring-2 focus:ring-blue-900 w-full" type="submit">
+      Kirim tautan setel ulang kata sandi
+     </button>
+    </form>
+    <p class="mt-4 text-center text-blue-800">
+     Menyerah dan akun baru aja.
+    </p>
+    <div class="text-center mt-2">
+     <button class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-5 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-900" id="btnDaftarLupaModal">
+      Pencet daftar
+     </button>
+    </div>
+   </div>
+  </div>
+  <script>
+   // Mobile menu toggle
+  const btnMenuMobile = document.getElementById('btnMenuMobile');
+  const mobileMenu = document.getElementById('mobileMenu');
+  btnMenuMobile.addEventListener('click', () => {
+    mobileMenu.classList.toggle('hidden');
+  });
+
+  // Modal Masuk/Daftar
+  const modalMasukDaftar = document.getElementById('modalMasukDaftar');
+  const btnMasukDaftar = document.getElementById('btnMasukDaftar');
+  const btnMasukDaftarMobile = document.getElementById('btnMasukDaftarMobile');
+  const closeModalMasukDaftar = document.getElementById('closeModalMasukDaftar');
+  const btnTabMasuk = document.getElementById('btnTabMasuk');
+  const btnTabDaftar = document.getElementById('btnTabDaftar');
+  const formMasuk = document.getElementById('formMasuk');
+  const formDaftar = document.getElementById('formDaftar');
+  const linkLupaPassword = document.getElementById('linkLupaPassword');
+  const modalLupaPassword = document.getElementById('modalLupaPassword');
+
+  function openModalMasukDaftar() {
+    modalMasukDaftar.classList.remove('hidden');
+    formMasuk.classList.remove('hidden');
+    formDaftar.classList.add('hidden');
+    btnTabMasuk.classList.add('bg-blue-600', 'text-white');
+    btnTabMasuk.classList.remove('bg-blue-200', 'text-blue-900');
+    btnTabDaftar.classList.remove('bg-blue-600', 'text-white');
+    btnTabDaftar.classList.add('bg-blue-200', 'text-blue-900');
+  }
+
+  btnMasukDaftar.addEventListener('click', openModalMasukDaftar);
+  btnMasukDaftarMobile.addEventListener('click', () => {
+    mobileMenu.classList.add('hidden');
+    openModalMasukDaftar();
+  });
+  closeModalMasukDaftar.addEventListener('click', () => {
+    modalMasukDaftar.classList.add('hidden');
+  });
+
+  btnTabMasuk.addEventListener('click', () => {
+    formMasuk.classList.remove('hidden');
+    formDaftar.classList.add('hidden');
+    btnTabMasuk.classList.add('bg-blue-600', 'text-white');
+    btnTabMasuk.classList.remove('bg-blue-200', 'text-blue-900');
+    btnTabDaftar.classList.remove('bg-blue-600', 'text-white');
+    btnTabDaftar.classList.add('bg-blue-200', 'text-blue-900');
+  });
+
+  btnTabDaftar.addEventListener('click', () => {
+    formMasuk.classList.add('hidden');
+    formDaftar.classList.remove('hidden');
+    btnTabDaftar.classList.add('bg-blue-600', 'text-white');
+    btnTabDaftar.classList.remove('bg-blue-200', 'text-blue-900');
+    btnTabMasuk.classList.remove('bg-blue-600', 'text-white');
+    btnTabMasuk.classList.add('bg-blue-200', 'text-blue-900');
+  });
+
+  // Modal Lupa Kata Sandi
+  const closeModalLupaPassword = document.getElementById('closeModalLupaPassword');
+  const btnDaftarLupa = document.getElementById('btnDaftarLupa');
+  const btnDaftarLupaModal = document.getElementById('btnDaftarLupaModal');
+
+  linkLupaPassword.addEventListener('click', () => {
+    modalMasukDaftar.classList.add('hidden');
+    modalLupaPassword.classList.remove('hidden');
+  });
+
+  closeModalLupaPassword.addEventListener('click', () => {
+    modalLupaPassword.classList.add('hidden');
+  });
+
+  btnDaftarLupa.addEventListener('click', () => {
+    modalLupaPassword.classList.add('hidden');
+    openModalMasukDaftar();
+    btnTabDaftar.click();
+  });
+
+  btnDaftarLupaModal.addEventListener('click', () => {
+    modalLupaPassword.classList.add('hidden');
+    openModalMasukDaftar();
+    btnTabDaftar.click();
+  });
+
+  // Game and Diamond selection logic
+  const gameButtons = document.querySelectorAll('.game-btn');
+  const diamondButtons = document.querySelectorAll('.diamond-btn');
+  const inputGameSelected = document.getElementById('gameSelected');
+  const inputDiamondSelected = document.getElementById('diamondSelected');
+
+  let selectedGame = null;
+  let selectedDiamond = null;
+
+  gameButtons.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      gameButtons.forEach((b) => b.classList.remove('ring-4', 'ring-blue-700'));
+      btn.classList.add('ring-4', 'ring-blue-700');
+      selectedGame = btn.getAttribute('data-game');
+      inputGameSelected.value = selectedGame;
+      updatePaymentStatus();
+    });
+  });
+
+  diamondButtons.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      diamondButtons.forEach((b) => b.classList.remove('ring-4', 'ring-blue-700'));
+      btn.classList.add('ring-4', 'ring-blue-700');
+      selectedDiamond = btn.getAttribute('data-diamond');
+      inputDiamondSelected.value = selectedDiamond;
+      updatePaymentStatus();
+    });
+  });
+
+  // Jumlah Pembelian tambah kurang
+  const btnTambahJumlah = document.getElementById('tambahJumlah');
+  const btnKurangJumlah = document.getElementById('kurangJumlah');
+  const inputJumlahBeli = document.getElementById('jumlahBeli');
+
+  btnTambahJumlah.addEventListener('click', () => {
+    inputJumlahBeli.value = Number(inputJumlahBeli.value) + 1;
+  });
+
+  btnKurangJumlah.addEventListener('click', () => {
+    if (Number(inputJumlahBeli.value) > 1) {
+      inputJumlahBeli.value = Number(inputJumlahBeli.value) - 1;
+    }
+  });
+
+  // Gunakan kode promo (dummy alert)
+  const btnGunakanPromo = document.getElementById('btnGunakanPromo');
+  btnGunakanPromo.addEventListener('click', () => {
+    const kode = document.getElementById('kodePromo').value.trim();
+    if (kode.length === 0) {
+      alert('Masukan kode promo terlebih dahulu.');
+    } else {
+      alert(`Kode promo "${kode}" berhasil digunakan!`);
+    }
+  });
+
+  // Form Top Up submit
+  const topupForm = document.getElementById('topupForm');
+  const menungguPembayaranSection = document.getElementById('menunggu-pembayaran');
+  const countdownTimer = document.getElementById('countdownTimer');
+  const metodePembayaranStatus = document.getElementById('metodePembayaranStatus');
+  const nomorInvoice = document.getElementById('nomorInvoice');
+  const statusPembayaran = document.getElementById('statusPembayaran');
+  const statusTransaksi = document.getElementById('statusTransaksi');
+  const btnLakukanPembayaran = document.getElementById('btnLakukanPembayaran');
+
+  let countdownInterval = null;
+
+  function startCountdown(durationSeconds) {
+    let timeLeft = durationSeconds;
+    function formatTime(t) {
+      const jam = Math.floor(t / 3600);
+      const menit = Math.floor((t % 3600) / 60);
+      const detik = t % 60;
+      return `${jam} jam ${menit} menit ${detik} detik`;
+    }
+    countdownTimer.textContent = formatTime(timeLeft);
+    countdownInterval = setInterval(() => {
+      timeLeft--;
+      if (timeLeft < 0) {
+        clearInterval(countdownInterval);
+        countdownTimer.textContent = "Waktu pembayaran telah habis.";
+        statusPembayaran.textContent = "Expired";
+        statusTransaksi.textContent = "Batal";
+        btnLakukanPembayaran.disabled = true;
+        btnLakukanPembayaran.classList.add('opacity-50', 'cursor-not-allowed');
+      } else {
+        countdownTimer.textContent = formatTime(timeLeft);
+      }
+    }, 1000);
+  }
+
+  function updatePaymentStatus() {
+    const metode = document.getElementById('metodePembayaran').value;
+    metodePembayaranStatus.textContent = metode || '-';
+  }
+
+  document.getElementById('metodePembayaran').addEventListener('change', updatePaymentStatus);
+
+  topupForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    // Validate required fields
+    if (!selectedGame) {
+      alert('Pilih game terlebih dahulu.');
+      return;
+    }
+    if (!selectedDiamond) {
+      alert('Pilih diamond terlebih dahulu.');
+      return;
+    }
+    if (!topupForm.idGame.value.trim()) {
+      alert('Masukan ID Game kamu.');
+      return;
+    }
+    if (!topupForm.metodePembayaran.value) {
+      alert('Pilih metode pembayaran.');
+      return;
+    }
+    if (!topupForm.emailKontak.value.trim()) {
+      alert('Masukan email kamu.');
+      return;
+    }
+    if (!topupForm.whatsappKontak.value.trim()) {
+      alert('Masukan nomor Whatsapp kamu.');
+      return;
+    }
+
+    // Simulasi buat nomor invoice unik
+    const invoice = 'INV' + Date.now();
+
+    nomorInvoice.textContent = invoice;
+    statusPembayaran.textContent = 'Unpaid';
+    statusTransaksi.textContent = 'Pending';
+    metodePembayaranStatus.textContent = topupForm.metodePembayaran.value;
+
+    menungguPembayaranSection.classList.remove('hidden');
+    menungguPembayaranSection.scrollIntoView({ behavior: 'smooth' });
+
+    // Mulai countdown 2 jam 56 menit 10 detik = 10570 detik
+    if (countdownInterval) clearInterval(countdownInterval);
+    startCountdown(10570);
+
+    alert('Pesanan berhasil dibuat! Silahkan lanjutkan pembayaran.');
+  });
+
+  btnLakukanPembayaran.addEventListener('click', () => {
+    const metode = metodePembayaranStatus.textContent;
+    if (metode === '-' || metode === '') {
+      alert('Pilih metode pembayaran terlebih dahulu.');
+      return;
+    }
+    alert(`Silahkan lakukan pembayaran melalui metode: ${metode}`);
+  });
+
+  // Form Lupa Password submit
+  const formLupaPassword = document.getElementById('formLupaPassword');
+  formLupaPassword.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const wa = formLupaPassword.whatsappLupa.value.trim();
+    if (!wa) {
+      alert('Masukan nomor Whatsapp kamu.');
+      return;
+    }
+    alert(`Tautan setel ulang kata sandi telah dikirim ke nomor Whatsapp: ${wa}`);
+    formLupaPassword.reset();
+  });
+
+  // Modal Lupa Password form submit
+  const formModalLupaPassword = document.getElementById('formModalLupaPassword');
+  formModalLupaPassword.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const wa = formModalLupaPassword.whatsappModalLupa.value.trim();
+    if (!wa) {
+      alert('Masukan nomor Whatsapp kamu.');
+      return;
+    }
+    alert(`Tautan setel ulang kata sandi telah dikirim ke nomor Whatsapp: ${wa}`);
+    formModalLupaPassword.reset();
+    modalLupaPassword.classList.add('hidden');
+  });
+
+  // Form Masuk submit (dummy)
+  formMasuk.addEventListener('submit', (e) => {
+    e.preventDefault();
+    alert('Berhasil masuk! (Simulasi)');
+    modalMasukDaftar.classList.add('hidden');
+  });
+
+  // Form Daftar submit (dummy)
+  formDaftar.addEventListener('submit', (e) => {
+    e.preventDefault();
+    alert('Berhasil daftar! Silahkan masuk.');
+    btnTabMasuk.click();
+  });
+
+  // Cek Transaksi button
+  const btnCekTransaksi = document.getElementById('btnCekTransaksi');
+  const btnCekTransaksiMobile = document.getElementById('btnCekTransaksiMobile');
+  btnCekTransaksi.addEventListener('click', () => {
+    alert('Anda harus mendaftar akun dulu untuk dapat mengecek transaksi.');
+    openModalMasukDaftar();
+  });
+  btnCekTransaksiMobile.addEventListener('click', () => {
+    alert('Anda harus mendaftar akun dulu untuk dapat mengecek transaksi.');
+    openModalMasukDaftar();
+    if (!mobileMenu.classList.contains('hidden')) {
+      mobileMenu.classList.add('hidden');
+    }
+  });
+  </script>
+ </body>
 </html>
